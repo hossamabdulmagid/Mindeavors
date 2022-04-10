@@ -1,8 +1,11 @@
 import './App.css';
-import SignIn from "./components/signin/signin.components";
-import SignUp from "./components/signup/signup.component";
+import SignIn from "./page/signin/signin.components";
+import SignUp from "./page/signup/signup.component";
+import Header from "./components/header/header.component";
 const App = () => {
     return (
+        <>
+        <Header />
         <div className="App">
             <header className="App-header">
                 <div className={''}>
@@ -12,6 +15,7 @@ const App = () => {
                 </div>
             </header>
         </div>
+        </>
     );
 }
 

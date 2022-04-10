@@ -18,7 +18,7 @@ const SignIn = () => {
     }
 
 
-    const handleSubmit = async event => {
+    const handleSubmit =  event => {
         event.preventDefault();
         console.log(userCred, `userCred OnSubmit`)
     }
