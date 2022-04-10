@@ -31,7 +31,7 @@ const SignUp = () => {
                 <Form.Label>Full Name </Form.Label>
                 <Form.Control type="text" placeholder="Name" onChange={handleChange} name={"fullName"}/>
                 <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                     Get In Touch with Your Name, Email, Password
                 </Form.Text>
             </Form.Group>
 
