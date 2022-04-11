@@ -17,6 +17,7 @@ const config = {
 // Your web app's Firebase configuration
 
 firebase.initializeApp(config);
+
 export const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unsubscribe = auth.onAuthStateChanged((userAuth) => {
