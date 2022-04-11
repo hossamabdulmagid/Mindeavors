@@ -27,4 +27,7 @@ export const RapperHeaderComponent = styled.div`
   strong{
     color:lightseagreen;
   }
+  .mb-3{
+    margin:20px;
+  }
 `;

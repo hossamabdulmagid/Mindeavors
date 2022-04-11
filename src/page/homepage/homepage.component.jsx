@@ -2,9 +2,26 @@ import Logohomepage from '../../homepage.png'
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
 import {connect} from 'react-redux';
 import {Do_get_posts} from "../../redux/posts/post-action";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import PostList from '../../components/postlist/postlist.component'
+import Form from 'react-bootstrap/Form';
 
 const Homepage = ({Do_get_posts, allPosts}) => {
+
+    const filterPosts = (filterItem) => {
+        if (!filterItem) {
+            return allPosts;
+        }
+        return allPosts.filter((allPosts) => allPosts && allPosts.title.includes(filterItem));
+    }
+
+    const [filterItem, setFilterItem] = useState("");
+
+    const filterdPosts = filterPosts(filterItem);
+
+    const updatedFilterHandler = (e) => {
+        setFilterItem(e.target.value);
+    }
 
     let CompanyName = 'How We Deliver';
 
@@ -12,8 +29,11 @@ const Homepage = ({Do_get_posts, allPosts}) => {
         Do_get_posts();
     }, [Do_get_posts])
 
+
     return (
         <RapperHeaderComponent className={'container'}>
+
+
             <img src={Logohomepage} alt={"HomePage"}/>
             <h1>
                 {CompanyName.toUpperCase()}
@@ -25,17 +45,25 @@ const Homepage = ({Do_get_posts, allPosts}) => {
                 and involvement techniques, engineering excellence tools as well as hybrid teams, we deliver the best
                 solutions that dissolve both business challenges and breakpoints via technology.
             </h3>
-            {allPosts && allPosts
-                .filter((singlePost, idx) => idx <= 20)
-                .map((singlePost, idx) => {
-                    return (
-                        <ul key={idx}>
-                            <li><strong>title </strong> : {singlePost.title}</li>
-                            <li><strong>body </strong> : {singlePost.body} </li>
-                        </ul>
-                    )
-                })
-            }
+            <Form.Group controlId="formFileDisabled" className="mb-3">
+                <Form.Control
+                    type="search"
+                    onChange={updatedFilterHandler}
+                    placeholder={'type any title to search in all posts'}
+                />
+            </Form.Group>
+            <PostList allPosts={filterdPosts}/>
+            {/*{allPosts && allPosts*/}
+            {/*    .filter((singlePost, idx) => idx <= 20)*/}
+            {/*    .map((singlePost, idx) => {*/}
+            {/*        return (*/}
+            {/*            <ul key={idx}>*/}
+            {/*                <li><strong>title </strong> : {singlePost.title}</li>*/}
+            {/*                <li><strong>body </strong> : {singlePost.body} </li>*/}
+            {/*            </ul>*/}
+            {/*        )*/}
+            {/*    })*/}
+            {/*}*/}
         </RapperHeaderComponent>
     )
 }
