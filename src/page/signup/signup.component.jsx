@@ -2,16 +2,17 @@ import {useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
-
+import {auth} from '../../lib/firebase';
 const SignUp = () => {
     const navigate = useNavigate();
 
     const [signUpCred, setSignUpCred] = useState({
-        fullName: '',
+        displayName: '',
         email: '',
         password: '',
+        Confirmpassword: '',
     });
-
+let auth;
     const handleChange = event => {
         const {name, value} = event.target;
         setSignUpCred({...signUpCred, [name]: value})
@@ -33,7 +34,7 @@ const SignUp = () => {
                     type="text"
                     placeholder="Name"
                     onChange={handleChange}
-                    name={"fullName"}
+                    name={"displayName"}
                     required
                 />
                 <Form.Text className="text-muted">
@@ -63,9 +64,20 @@ const SignUp = () => {
                     required
                 />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Re type Password"
+                    onChange={handleChange}
+                    name={"Confirmpassword"}
+                    required
+                />
+            </Form.Group>
             <Button variant="primary" type="submit">
                 Sign Up
             </Button>
+
         </Form>
     )
 

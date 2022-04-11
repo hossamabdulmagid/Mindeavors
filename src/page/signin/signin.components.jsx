@@ -2,6 +2,8 @@ import {useState} from 'react';
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
+import {signInWithGoogle} from '../../lib/firebase';
+import GoogleLogo from '../../google.png'
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -54,6 +56,8 @@ const SignIn = () => {
                 <Button variant="primary" type="submit">
                     Log In
                 </Button>
+                <br/>
+                <img src={GoogleLogo} alt={"googlelogo"} onClick={signInWithGoogle}/>
             </Form>
         </div>
     )
