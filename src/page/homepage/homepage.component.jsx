@@ -25,14 +25,17 @@ const Homepage = ({Do_get_posts, allPosts}) => {
                 and involvement techniques, engineering excellence tools as well as hybrid teams, we deliver the best
                 solutions that dissolve both business challenges and breakpoints via technology.
             </h3>
-            {allPosts && allPosts.map((singlepost, idx) => {
-                return (
-                    <ul key={idx}>
-                        <li>{singlepost.title}</li>
-                        <li>{singlepost.body} </li>
-                    </ul>
-                )
-            })}
+            {allPosts && allPosts
+                .filter((singlePost, idx) => idx <= 20)
+                .map((singlePost, idx) => {
+                    return (
+                        <ul key={idx}>
+                            <li><strong>title </strong> : {singlePost.title}</li>
+                            <li><strong>body </strong> : {singlePost.body} </li>
+                        </ul>
+                    )
+                })
+            }
         </RapperHeaderComponent>
     )
 }

@@ -16,11 +16,15 @@ export const RapperHeaderComponent = styled.div`
   }
   h3{
     padding:5px;
+    margin-bottom: 15px;
   }
   ul{
     border-bottom: 2px solid limegreen;
     list-style: none;
     padding:5px;
+    margin:5px;
   }
-  
+  strong{
+    color:lightseagreen;
+  }
 `;
