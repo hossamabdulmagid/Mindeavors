@@ -3,7 +3,7 @@ import {PostType} from "./post-type";
 const INITIAL_STATE = {
     loading: false,
     error: null,
-    posts: [{
+    allPosts: [{
         userId: null,
         id: null,
         title: "",
@@ -22,7 +22,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 loading: false,
-                posts: action.payload
+                allPosts: action.payload
             }
 
         case PostType.GET_POST_ERROR:

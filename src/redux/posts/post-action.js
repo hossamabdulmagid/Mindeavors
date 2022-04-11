@@ -1,7 +1,7 @@
 import {PostType} from "./post-type";
 import axios from "axios";
 
-let url = `https://jsonplaceholder.typicode.com/users/1/posts`;
+let url = `https://jsonplaceholder.typicode.com/posts`;
 const Post_Start = () => ({
     type: PostType.GET_POST_START,
 })
