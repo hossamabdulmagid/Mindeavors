@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
 import {signInWithGoogle} from '../../lib/firebase';
 import GoogleLogo from '../../google.png'
-
+import {auth } from '../../lib/firebase'
 const SignIn = () => {
     const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const SignIn = () => {
         email: "",
         password: "",
     });
-
+    const {email, password} = userCred;
 
     const handleChange = event => {
         const {name, value} = event.target;
@@ -22,11 +22,24 @@ const SignIn = () => {
     }
 
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        navigate('/')
+        if (password.length < 6) {
+
+
+            return;
+        }
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            // navigate('/')
+
+        } catch (error) {
+            console.log(error, `this an error`);
+
+        }
         console.log(userCred, `user Submit Login Wating Api`)
     }
+
     return (
         <div>
             <Form onSubmit={handleSubmit}>

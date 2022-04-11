@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import {enableIndexedDbPersistence} from "firebase/firestore";
 
 
 // mush hide secret Keys in .env but it just for test
@@ -29,15 +30,27 @@ export const getCurrentUser = () => {
 
 export const auth = firebase.auth();
 
-export const firestore = firebase.firestore();
 
+export const firestore = firebase.firestore();
+enableIndexedDbPersistence(firestore)
+    .catch((err) => {
+        if (err.code == 'failed-precondition') {
+            // Multiple tabs open, persistence can only be enabled
+            // in one tab at a a time.
+            // ...
+        } else if (err.code == 'unimplemented') {
+            // The current browser does not support all of the
+            // features required to enable persistence
+            // ...
+        }
+    });
+// Subsequent queries will use persistence, if it was enabled successfully
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
     prompt: "select_account",
 });
-
 
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -50,7 +63,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     console.log(snapShot, `SnapShot`);
 
     if (!snapShot.exists) {
-        const { displayName, email } = userAuth;
+        const {displayName, email} = userAuth;
 
         const createdAt = new Date();
 
@@ -72,7 +85,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
-
 
 
 export default firebase;
