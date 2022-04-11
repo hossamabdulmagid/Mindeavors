@@ -5,6 +5,7 @@ import {Do_get_posts} from "../../redux/posts/post-action";
 import {useEffect, useState} from "react";
 import PostList from '../../components/postlist/postlist.component'
 import Form from 'react-bootstrap/Form';
+import {Spinner} from "react-bootstrap";
 
 const Homepage = ({Do_get_posts, allPosts}) => {
 
@@ -24,10 +25,20 @@ const Homepage = ({Do_get_posts, allPosts}) => {
     }
 
     let title = 'How We Deliver';
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         Do_get_posts();
-    }, [Do_get_posts])
+        setTimeout(() => {
+            if (!allPosts.length) {
+                setLoading(true);
+            } else {
+                setLoading(true)
+            }
+
+        }, 2000)
+
+    }, [Do_get_posts, allPosts.length])
 
 
     return (
@@ -52,7 +63,8 @@ const Homepage = ({Do_get_posts, allPosts}) => {
                     placeholder={'type any title to search in all posts'}
                 />
             </Form.Group>
-            <PostList allPosts={filterdPosts}/>
+            {loading ? <PostList allPosts={filterdPosts}/> : <Spinner animation={`border`}/>}
+
             {/*{allPosts && allPosts*/}
             {/*    .filter((singlePost, idx) => idx <= 20)*/}
             {/*    .map((singlePost, idx) => {*/}
