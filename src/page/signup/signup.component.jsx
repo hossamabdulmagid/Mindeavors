@@ -2,7 +2,9 @@ import {useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
-import {auth} from '../../lib/firebase';
+import {auth, createUserProfileDocument} from '../../lib/firebase'
+import {useSelector} from 'react-redux'
+
 const SignUp = () => {
     const navigate = useNavigate();
 
@@ -10,20 +12,29 @@ const SignUp = () => {
         displayName: '',
         email: '',
         password: '',
-        Confirmpassword: '',
+        confirmPassword: '',
     });
-let auth;
+
     const handleChange = event => {
         const {name, value} = event.target;
         setSignUpCred({...signUpCred, [name]: value})
-        console.log(signUpCred, `while user Typing`)
     }
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        navigate('/')
-        console.log(signUpCred, `after user submit Register waiting Api`)
+    const currentUser = useSelector((state) => state.user.currentUser)
 
+    const handleSubmit = async event => {
+        event.preventDefault();
+        const {displayName, email, password, confirmPassword} = signUpCred;
+        if(password )
+        try {
+            const {user} = await auth.createUserWithEmailAndPassword(
+                email,
+                password
+            );
+            await createUserProfileDocument(user, {displayName});
+        } catch (error) {
+            console.log(error, `this an error`);
+        }
     }
 
     return (
@@ -70,7 +81,7 @@ let auth;
                     type="password"
                     placeholder="Re type Password"
                     onChange={handleChange}
-                    name={"Confirmpassword"}
+                    name={"confirmPassword"}
                     required
                 />
             </Form.Group>
