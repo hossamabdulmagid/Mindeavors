@@ -2,9 +2,10 @@ import {useState} from 'react';
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
-import {signInWithGoogle} from '../../lib/firebase';
-import GoogleLogo from '../../google.png'
-import {auth } from '../../lib/firebase'
+import {auth, signInWithGoogle} from '../../lib/firebase';
+import {FcGoogle} from "react-icons/fc";
+
+
 const SignIn = () => {
     const navigate = useNavigate();
 
@@ -70,7 +71,12 @@ const SignIn = () => {
                     Log In
                 </Button>
                 <br/>
-                <img src={GoogleLogo} alt={"googlelogo"} onClick={signInWithGoogle}/>
+                <Button className={'btn btn-light'} onClick={signInWithGoogle}>
+                    <h5 style={{display: 'inline', padding: '4px'}}>
+                        <FcGoogle/>
+                    </h5>
+                    <span>Log in With Google</span>
+                </Button>
             </Form>
         </div>
     )
