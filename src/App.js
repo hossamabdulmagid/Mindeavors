@@ -36,7 +36,7 @@ const App = ({currentUser, setCurrentUser}) => {
 
     return (
         <>
-            <Header/>
+            <Header currentUser={currentUser}/>
             <div className="App">
                 <header className="App-header">
                     <Routes>
