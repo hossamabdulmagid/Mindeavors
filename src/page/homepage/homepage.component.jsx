@@ -23,7 +23,7 @@ const Homepage = ({Do_get_posts, allPosts}) => {
         setFilterItem(e.target.value);
     }
 
-    let CompanyName = 'How We Deliver';
+    let title = 'How We Deliver';
 
     useEffect(() => {
         Do_get_posts();
@@ -36,7 +36,7 @@ const Homepage = ({Do_get_posts, allPosts}) => {
 
             <img src={Logohomepage} alt={"HomePage"}/>
             <h1>
-                {CompanyName.toUpperCase()}
+                {title.toUpperCase()}
             </h1>
             <span className={"blueLine"}/>
             <h3>
@@ -71,7 +71,9 @@ const Homepage = ({Do_get_posts, allPosts}) => {
 const mapStateToProps = state => ({
     allPosts: state.posts.allPosts
 })
+
 const mapDispatchToProps = dispatch => ({
     Do_get_posts: () => dispatch(Do_get_posts())
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
