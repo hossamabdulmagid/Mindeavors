@@ -14,7 +14,8 @@ const persistConfig = {
 //whitelist
 const rootReducer = combineReducers({
     posts: postReducer,
-    user: userReducer
+    user: userReducer,
+
 });
 
 export default persistReducer(persistConfig, rootReducer);

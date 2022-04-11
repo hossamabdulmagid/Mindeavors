@@ -1,5 +1,6 @@
 import {PostType} from "./post-type";
 import axios from "axios";
+import {toast} from 'react-toastify';
 
 let url2 = `https://reqres.in/api/users?page=2`;
 let url = `https://jsonplaceholder.typicode.com/posts`;
@@ -24,17 +25,18 @@ export const Do_get_posts = () => {
         dispatch(Post_Start())
         axios
             .get(url)
-            .then((res, error) => {
-                if (error) {
-                    hasError = true;
-                    dispatch(Post_Error(error))
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(Post_Success(res.data))
                 }
-                dispatch(Post_Success(res.data))
+
             })
             .catch((error) => {
-                if (hasError) {
-                    dispatch(Post_Error(error))
-                }
+                dispatch(Post_Error(error))
+
+                dispatch(toast.error(error.toString()))
+
+
             })
     }
 }

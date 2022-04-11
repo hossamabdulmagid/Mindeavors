@@ -10,6 +10,9 @@ import setCurrentUser from './redux/user/user-action';
 import {useEffect} from "react";
 import {auth, createUserProfileDocument} from './lib/firebase'
 import SignUp from "./page/signup/signup.component";
+import {ToastContainer} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({currentUser, setCurrentUser}) => {
     let unsubscribeFormAuth = null;
@@ -34,6 +37,7 @@ const App = ({currentUser, setCurrentUser}) => {
 
     return (
         <>
+            <ToastContainer/>
             <Header currentUser={currentUser}/>
             <div className="App">
                 <header className="App-header">
@@ -47,6 +51,7 @@ const App = ({currentUser, setCurrentUser}) => {
                     </Routes>
                 </header>
             </div>
+
         </>
     );
 }

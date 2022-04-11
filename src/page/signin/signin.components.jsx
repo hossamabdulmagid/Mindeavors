@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
 import {auth, signInWithGoogle} from '../../lib/firebase';
 import {FcGoogle} from "react-icons/fc";
+import {toast} from 'react-toastify';
 
 
 const SignIn = () => {
@@ -26,16 +27,19 @@ const SignIn = () => {
     const handleSubmit = async event => {
         event.preventDefault();
         if (password.length < 6) {
-
-
+            toast.warn(`The password must be 6 to 32 characters long`)
             return;
         }
         try {
             await auth.signInWithEmailAndPassword(email, password);
+            toast.success(`welcome ${email.toString()}`)
             // navigate('/')
 
         } catch (error) {
             console.log(error, `this an error`);
+            toast.error(`${error.toString()}`, {
+                theme: "colored"
+            })
 
         }
         console.log(userCred, `user Submit Login Wating Api`)
@@ -71,7 +75,7 @@ const SignIn = () => {
                     Log In
                 </Button>
                 <br/>
-                <Button className={'btn btn-light'} onClick={signInWithGoogle}>
+                <Button style={{marginTop: '20px'}} className={'btn btn-light'} onClick={signInWithGoogle}>
                     <h5 style={{display: 'inline', padding: '4px'}}>
                         <FcGoogle/>
                     </h5>

@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
 import {auth, createUserProfileDocument} from '../../lib/firebase'
+import {toast} from "react-toastify";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -23,14 +24,27 @@ const SignUp = () => {
 
     const handleSubmit = async event => {
         event.preventDefault();
+        if (password !== confirmPassword) {
+            toast.warn(`passwords don't match`);
+            return;
+        }
+        if (password.length < 6) {
+            toast.warn(`The password must be 6 to 32 characters long`)
+            return;
+        }
         try {
             const {user} = await auth.createUserWithEmailAndPassword(
                 email,
                 password
             );
-            await createUserProfileDocument(user, {displayName, email, password,});
+            await createUserProfileDocument(user, {displayName, email, password});
+            toast.success(`welcome your Account Created ${email.toString()}`)
         } catch (error) {
             console.log(error, `this an error`);
+            toast.error(` ${error.toString()}`, {
+                theme: "colored"
+            })
+
         }
     }
 
