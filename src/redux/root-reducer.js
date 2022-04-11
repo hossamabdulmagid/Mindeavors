@@ -1,6 +1,7 @@
 import {combineReducers} from "redux";
 import {persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import postReducer from "./posts/post-reducer";
 
 
 //blacklist
@@ -10,6 +11,8 @@ const persistConfig = {
     whitelist: [""],
 };
 //whitelist
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+    posts: postReducer,
+});
 
 export default persistReducer(persistConfig, rootReducer);
