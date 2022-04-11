@@ -14,7 +14,6 @@ import SignUp from "./page/signup/signup.component";
 const App = ({currentUser, setCurrentUser}) => {
     let unsubscribeFormAuth = null;
 
-    console.log(currentUser, `currentUser`)
     useEffect(() => {
         unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
@@ -31,7 +30,6 @@ const App = ({currentUser, setCurrentUser}) => {
         return () => {
             unsubscribeFormAuth();
         }
-
     }, [])
 
     return (

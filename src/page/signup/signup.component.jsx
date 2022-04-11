@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
 import {auth, createUserProfileDocument} from '../../lib/firebase'
-import {useSelector} from 'react-redux'
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -19,19 +18,17 @@ const SignUp = () => {
         const {name, value} = event.target;
         setSignUpCred({...signUpCred, [name]: value})
     }
+    const {displayName, email, password, confirmPassword} = signUpCred;
 
-    const currentUser = useSelector((state) => state.user.currentUser)
 
     const handleSubmit = async event => {
         event.preventDefault();
-        const {displayName, email, password, confirmPassword} = signUpCred;
-        if(password )
         try {
             const {user} = await auth.createUserWithEmailAndPassword(
                 email,
                 password
             );
-            await createUserProfileDocument(user, {displayName});
+            await createUserProfileDocument(user, {displayName, email, password,});
         } catch (error) {
             console.log(error, `this an error`);
         }
@@ -47,6 +44,7 @@ const SignUp = () => {
                     onChange={handleChange}
                     name={"displayName"}
                     required
+
                 />
                 <Form.Text className="text-muted">
                     Get in Touch No verification e-mail will be sent
@@ -88,7 +86,6 @@ const SignUp = () => {
             <Button variant="primary" type="submit">
                 Sign Up
             </Button>
-
         </Form>
     )
 

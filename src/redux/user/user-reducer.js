@@ -1,9 +1,15 @@
 import {UserType} from "./user-type";
 
 const INITIAL_STATE = {
-    currentUser: null,
+
     loading: false,
     error: null,
+    currentUser: {
+        createdAt: "",
+        displayName: '',
+        email: '',
+        id: '',
+    }
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -13,7 +19,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: action.payload,
             };
-
 
         default:
             return state;
