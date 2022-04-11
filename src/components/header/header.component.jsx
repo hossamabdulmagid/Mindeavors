@@ -15,8 +15,10 @@ const Header = ({currentUser}) => {
                     <Nav className="" style={{textAlign: 'right'}}>
                         {currentUser ?
                             <Nav.Link onClick={() => auth.signOut()} style={{cursor: 'pointer'}}>
-                                <span
-                                    style={{color: 'limegreen'}}>   ({currentUser && currentUser.displayName}) </span> logout
+                                <span style={{color: 'limegreen'}}>
+                                    ({currentUser && currentUser.displayName})
+                                </span> logout
+
                             </Nav.Link> :
                             <>
                                 <Nav.Link href="/signin">Login</Nav.Link>
@@ -29,6 +31,5 @@ const Header = ({currentUser}) => {
         </>
     )
 }
-
 
 export default (Header);
