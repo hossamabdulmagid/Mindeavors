@@ -12,7 +12,6 @@ export const RapperHeaderComponent = styled.div`
     border: 1px solid limegreen;
     width: 80px;
     display: inline-flex;
-    margin: 0 auto;
     margin-bottom: 10px;
   }
   h3{
