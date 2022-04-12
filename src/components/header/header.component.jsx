@@ -14,15 +14,52 @@ const Header = ({currentUser}) => {
                     </Navbar.Brand>
                     <Nav className="" style={{textAlign: 'right'}}>
                         {currentUser ?
-                            <Nav.Link onClick={() => auth.signOut()} style={{cursor: 'pointer'}}>
+                            <>
+                                <Nav.Link
+                                    href="/"
+                                    style={{
+                                        cursor: 'pointer',
+                                        textDecoration: 'none',
+                                        color: 'white',
+                                        margin: '2px'
+                                    }}>
+                                    Create Post
+                                </Nav.Link>
+                                <Nav.Link
+                                    onClick={() => auth.signOut()}
+                                    style={{
+                                        cursor: 'pointer',
+                                        textDecoration: 'none',
+                                        color: 'white',
+                                        margin: '2px'
+                                    }}>
                                 <span style={{color: 'limegreen'}}>
                                     ({currentUser && currentUser.displayName})
-                                </span> logout
-
-                            </Nav.Link> :
+                                </span>
+                                    {" logout"}
+                                </Nav.Link>
+                            </> :
                             <>
-                                <Nav.Link href="/signin">Login</Nav.Link>
-                                <Nav.Link href="/signup">Signup</Nav.Link>
+                                <Nav.Link
+                                    href="/signin"
+                                    style={{
+                                        cursor: 'pointer',
+                                        textDecoration: 'none',
+                                        color: 'white',
+                                        margin: '2px'
+                                    }}>
+                                    Login
+                                </Nav.Link>
+                                <Nav.Link
+                                    href="/signup"
+                                    style={{
+                                        cursor: 'pointer',
+                                        textDecoration: 'none',
+                                        color: 'white',
+                                        margin: '2px'
+                                    }}>
+                                    Signup
+                                </Nav.Link>
                             </>
                         }
                     </Nav>
