@@ -7,7 +7,7 @@ import {useLocation} from 'react-router-dom';
 import {connect} from "react-redux";
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
 import Card from "react-bootstrap/Card";
-
+import {Button} from "react-bootstrap";
 
 const EditSinglePost = ({Get_Single_post, UpdateSinglePost, singlePost, singlepostLoading}) => {
     const headers = {
@@ -43,9 +43,9 @@ const EditSinglePost = ({Get_Single_post, UpdateSinglePost, singlePost, singlepo
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted">
-                        2 days ago
+                        <Button className={`btn btn-success`}>Edit</Button>
+                        <Button className={`btn btn-danger`}>Delete</Button>
                     </Card.Footer>
-
                 </Card>
             </RapperHeaderComponent>
         </div>

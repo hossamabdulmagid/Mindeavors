@@ -49,5 +49,15 @@ export const RapperHeaderComponent = styled.div`
     margin: 20px;
   }
 
- 
+  .text-muted {
+    text-align: end
+  }
+
+  Button {
+    margin: 5px;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
 `;
