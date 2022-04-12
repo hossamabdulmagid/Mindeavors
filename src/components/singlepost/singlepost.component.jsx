@@ -51,6 +51,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading}) => {
             <DeletePost
                 show={show}
                 handleClose={() => handleClose()}
+                singlePost={singlePost}
             />
         </>
 
