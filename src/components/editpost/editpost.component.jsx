@@ -1,12 +1,14 @@
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {UpdateSinglePost} from "../../redux/posts/post-action";
 import {connect} from "react-redux";
 import {toast} from 'react-toastify';
 import {useLocation, useNavigate} from 'react-router-dom';
+import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
+import Card from "react-bootstrap/Card";
 
-const EditPost = ({UpdateSinglePost}) => {
+const EditPost = ({UpdateSinglePost, PostUpdated, postLoading}) => {
 
     const location = useLocation();
 
@@ -33,17 +35,20 @@ const EditPost = ({UpdateSinglePost}) => {
         event.preventDefault()
         UpdateSinglePost(post, headers)
         toast.success(`Post Updated Successful`)
-        navigate('/')
+        // navigate('/')
     }
 
     const Cancel = () => {
         let result = location.pathname.slice(11);
         navigate(`/posts/${result}`)
     }
+    useEffect(() => {
+
+    }, [postLoading])
     return (
         <div className={'container'}>
             <div className={'row'}>
-                <Form onSubmit={handleSubmit}>
+                {postLoading ? <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control
                             type="text"
@@ -72,15 +77,29 @@ const EditPost = ({UpdateSinglePost}) => {
                     <Button variant="primary" style={{margin: '2px'}} onClick={Cancel}>
                         Cancel
                     </Button>
-                </Form>
+                </Form> : <div className={"container"}>
+                    <RapperHeaderComponent className={'col-sm-12'}>
+                        <Card>
+                            <Card.Header as="h3">{PostUpdated.title}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    <small>{PostUpdated.body}</small>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </RapperHeaderComponent>
+                </div>}
             </div>
         </div>
 
     )
 }
 
-
+const mapStataToProps = state => ({
+    PostUpdated: state.posts.singlePost,
+    postLoading: state.posts.flag,
+})
 const mapDispatchToProps = dispatch => ({
     UpdateSinglePost: (post, headers) => dispatch(UpdateSinglePost(post, headers))
 })
-export default connect(null, mapDispatchToProps)(EditPost);
+export default connect(mapStataToProps, mapDispatchToProps)(EditPost);

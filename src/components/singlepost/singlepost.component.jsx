@@ -34,11 +34,12 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comm
         <>
             {!singlepostLoading ?
                 <div className={"container"}>
-                    <RapperHeaderComponent className={'col-sm-12'}>
+                    <RapperHeaderComponent className={'col-sm-10'}>
                         <Card>
                             <Card.Header as="h4">{singlePost.title}</Card.Header>
                             <Card.Body>
                                 <Card.Text>
+
                                     <small>{singlePost.body}</small>
                                 </Card.Text>
                             </Card.Body>

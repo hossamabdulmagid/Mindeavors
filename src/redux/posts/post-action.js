@@ -51,8 +51,9 @@ const Edit_Post_Start = () => ({
     type: PostType.EDIT_POST_START
 })
 
-const Edit_Post_Success = () => ({
+const Edit_Post_Success = (data) => ({
     type: PostType.EDIT_POST_SUCCESS,
+    payload: data,
 })
 
 const Edit_Post_Error = (error) => ({
@@ -69,7 +70,7 @@ export const UpdateSinglePost = (post, headers) => {
             })
             .then((res) => {
                 if (res.status === 200) {
-                    dispatch(Edit_Post_Success())
+                    dispatch(Edit_Post_Success(res.data))
                     console.log(res, `response from Api`)
                 }
             })

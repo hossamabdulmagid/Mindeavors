@@ -4,11 +4,12 @@ const INITIAL_STATE = {
     loading: false,
     error: null,
     singlePost: {
-        userId: null,
-        id: null,
+        userId: "",
+        id: "",
         title: "",
         body: ""
     },
+    flag: true,
     allPosts: [{
         userId: null,
         id: null,
@@ -43,11 +44,15 @@ const postReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 loading: true,
+                flag: true,
             }
         case PostType.EDIT_POST_SUCCESS:
             return {
                 ...state,
                 loading: false,
+                singlePost: action.payload,
+                flag: false,
+
             }
 
         case PostType.EDIT_POST_ERROR:
@@ -55,6 +60,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: false,
                 error: action.payload,
+                flag: false
             }
 
 
