@@ -12,7 +12,7 @@ import DeletePost from "../deletepost/deletepost.component";
 import {Do_Get_Comments} from "../../redux/comments/comments-action";
 
 
-const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comments, comments = []}) => {
+const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comments, comments = [], currentUser}) => {
 
 
     const location = useLocation();
@@ -23,7 +23,8 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comm
         Get_Single_post(id);
         Do_Get_Comments()
     }, [Get_Single_post, id, Do_Get_Comments]);
-    console.log(comments, `comments`)
+
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -32,7 +33,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comm
 
     return (
         <>
-            {!singlepostLoading ?
+            {!singlePostLoading ?
                 <div className={"container"}>
                     <RapperHeaderComponent className={'col-sm-10'}>
                         <Card>
@@ -44,8 +45,17 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comm
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
-                                <Link className={`btn btn-success`} to={`/edit-post/${singlePost.id}`}>Edit</Link>
-                                <Button className={`btn btn-danger`} onClick={handleShow}>Delete</Button>
+                                {currentUser ? <>
+                                    <Link className={`btn btn-success`} to={`/edit-post/${singlePost.id}`}>Edit</Link>
+                                    <Button
+                                        className={`btn btn-danger`}
+                                        onClick={handleShow}
+                                    >
+                                        Delete
+                                    </Button>
+                                </> : <Link to={'/signin'} className={` container btn btn-warning`}>
+                                    <h5>log in to edit or delete post </h5>
+                                </Link>}
                             </Card.Footer>
                             <div className={"container"}>
                                 {comments && comments.data && comments.data.map((singleComment, idx) => {
@@ -69,16 +79,12 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comm
                                                         <small>
                                                             {singlePost.body}
                                                         </small>
-
                                                     </p>
-
                                                 </div>
-                                                {/*<AiTwotoneDislike />*/}
                                             </div>
                                             <p className={'space'}></p>
-
                                         </div>
-                                )
+                                    )
                                 })}
 
                             </div>
@@ -97,8 +103,10 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading, Do_Get_Comm
 
 const mapStateToProps = state => ({
     singlePost: state.posts.singlePost,
-    singlepostLoading: state.posts.loading,
+    singlePostLoading: state.posts.loading,
     comments: state.comments.comments,
+    currentUser: state.user.currentUser,
+
 
 })
 const mapDispatchToProps = dispatch => ({
