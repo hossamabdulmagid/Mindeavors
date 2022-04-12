@@ -1,22 +1,27 @@
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
+import Card from 'react-bootstrap/Card'
 
 const PostList = ({allPosts}) => {
     return (
 
         <>
-            <RapperHeaderComponent>
-
-                {allPosts.map((singlePost, idx) => {
-                    return (
-                        <ul key={idx}>
-                            <li><strong>id :</strong>{singlePost.id}</li>
-                            <li><strong> title</strong> : {singlePost.title}</li>
-                            <li><strong>body</strong> : {singlePost.body} </li>
-                        </ul>
-                    )
-                })}
-
-            </RapperHeaderComponent>
+            {allPosts.map((singlePost, idx) => {
+                return (
+                    <div className={"col-md-3"} key={idx}>
+                        <RapperHeaderComponent>
+                            <Card>
+                                <Card.Header as="h4">{singlePost.title}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title></Card.Title>
+                                    <Card.Text>
+                                        <small><p>{singlePost.body}</p></small>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </RapperHeaderComponent>
+                    </div>
+                )
+            })}
         </>
     )
 }

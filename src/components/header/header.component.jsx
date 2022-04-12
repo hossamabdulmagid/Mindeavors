@@ -7,7 +7,7 @@ const Header = ({currentUser}) => {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant={"secondary"}>
                 <Container>
                     <Navbar.Brand href="/">
                         <img src={Mindeavors} className="App-logo-navbar" alt="logo" width={180}/>
