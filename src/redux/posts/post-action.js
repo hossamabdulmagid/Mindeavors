@@ -54,7 +54,8 @@ const Edit_Post_Error = (error) => ({
     payload: error
 })
 
-export const UpdateSinglePost = (data, headers) => {
+export const UpdateSinglePost = (data, headers, toast) => {
+    console.log(toast, `toast`)
     return dispatch => {
         dispatch(Edit_Post_Start)
         axios
@@ -65,6 +66,7 @@ export const UpdateSinglePost = (data, headers) => {
                 if (res.status === 200) {
                     dispatch(Edit_Post_Success())
                     console.log(res, `response from Api`)
+                    dispatch(toast.success(`resposne status :${res.status} Congrats Post Has been Updated`))
                 }
             })
             .catch(error => {
