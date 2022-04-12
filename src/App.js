@@ -11,9 +11,8 @@ import {useEffect} from "react";
 import {auth, createUserProfileDocument} from './lib/firebase'
 import SignUp from "./page/signup/signup.component";
 import {ToastContainer} from 'react-toastify';
-
+import SinglePost from './components/singlepost/singlepost.component'
 import 'react-toastify/dist/ReactToastify.css';
-import EditSinglePost from "./components/editpost/editpost.component";
 
 const App = ({currentUser, setCurrentUser}) => {
     let unsubscribeFormAuth = null;
@@ -44,12 +43,11 @@ const App = ({currentUser, setCurrentUser}) => {
                 <header className="App-header">
                     <Routes>
                         <Route path={'/'} exact element={<Homepage/>}/>
-                        {/*<Route path={'/signin'} element={<SignIn/>}/>*/}
-                        {/*<Route path={'/signup'} element={<SignUp/>}/>*/}
                         <Route path="/signin" element={currentUser ? <Navigate to="/"/> : <SignIn/>}/>
                         <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp/>}/>
-                        <Route path="/posts/:id" element={<EditSinglePost/>}/>
+                        <Route path="/posts/:id" element={<SinglePost/>}/>
 
+                        {/*<Route path="/edit-posts/:id" element={<EditSinglePost/>}/>*/}
                     </Routes>
                 </header>
             </div>
