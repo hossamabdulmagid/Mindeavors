@@ -6,7 +6,7 @@ let url = `https://jsonplaceholder.typicode.com/posts`;
 let urlCreated = `https://jsonplaceholder.typicode.com/posts`;
 let urlUpdated = `https://jsonplaceholder.typicode.com/posts/1`;
 let urlDelete = `https://jsonplaceholder.typicode.com/posts/1`;
-let urlSinglePost = `https://jsonplaceholder.typicode.com/posts/1`;
+let urlSinglePost = `https://jsonplaceholder.typicode.com`;
 const Post_Start = () => ({
     type: PostType.GET_POST_START,
 })
@@ -90,10 +90,10 @@ const Single_Post_Error = (error) => ({
     payload: error
 })
 
-export const Get_Single_post = () => {
+export const Get_Single_post = (id) => {
     return dispatch => {
         dispatch(Single_Post_Start)
-        axios.get(urlSinglePost)
+        axios.get(`${urlSinglePost}${id}`)
             .then((res) => {
                 dispatch(Single_Post_Success(res.data))
                 console.log(res, `response from Single`)

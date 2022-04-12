@@ -16,7 +16,7 @@ const PostList = ({allPosts}) => {
                                     <Card.Body>
                                         <Card.Title></Card.Title>
                                         <Card.Text>
-                                            <small><p>{singlePost.body}</p></small>
+                                            <small>{singlePost.body}</small>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
