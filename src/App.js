@@ -13,6 +13,7 @@ import SignUp from "./page/signup/signup.component";
 import {ToastContainer} from 'react-toastify';
 import SinglePost from './components/singlepost/singlepost.component'
 import 'react-toastify/dist/ReactToastify.css';
+import EditPost from "./components/editpost/editpost.component";
 
 const App = ({currentUser, setCurrentUser}) => {
     let unsubscribeFormAuth = null;
@@ -47,7 +48,7 @@ const App = ({currentUser, setCurrentUser}) => {
                         <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
 
-                        {/*<Route path="/edit-posts/:id" element={<EditSinglePost/>}/>*/}
+                        <Route path="/edit-post/:id" element={<EditPost/>}/>
                     </Routes>
                 </header>
             </div>

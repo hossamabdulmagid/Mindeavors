@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 
 import {Get_Single_post, UpdateSinglePost} from '../../redux/posts/post-action';
 
-import {useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import {connect} from "react-redux";
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
@@ -43,7 +43,7 @@ const SinglePost = ({Get_Single_post, UpdateSinglePost, singlePost, singlepostLo
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted">
-                        <Button className={`btn btn-success`}>Edit</Button>
+                        <Link className={`btn btn-success`} to={`/edit-post/${singlePost.id}`}>Edit</Link>
                         <Button className={`btn btn-danger`}>Delete</Button>
                     </Card.Footer>
                 </Card>
