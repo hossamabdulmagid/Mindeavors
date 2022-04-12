@@ -3,6 +3,12 @@ import {PostType} from "./post-type";
 const INITIAL_STATE = {
     loading: false,
     error: null,
+    singlePost: {
+        userId: null,
+        id: null,
+        title: "",
+        body: ""
+    },
     allPosts: [{
         userId: null,
         id: null,
@@ -47,6 +53,28 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: false,
                 error: action.payload,
+            }
+
+
+        case PostType.SINGLE_POST_START:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case PostType.SINGLE_POST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                singlePost: action.payload,
+            }
+
+
+        case PostType.SINGLE_POST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
         default:
             return state;

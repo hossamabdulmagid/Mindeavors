@@ -6,6 +6,7 @@ let url = `https://jsonplaceholder.typicode.com/posts`;
 let urlCreated = `https://jsonplaceholder.typicode.com/posts`;
 let urlUpdated = `https://jsonplaceholder.typicode.com/posts/1`;
 let urlDelete = `https://jsonplaceholder.typicode.com/posts/1`;
+let urlSinglePost = `https://jsonplaceholder.typicode.com/posts/1`;
 const Post_Start = () => ({
     type: PostType.GET_POST_START,
 })
@@ -69,6 +70,37 @@ export const UpdateSinglePost = (data, headers) => {
             .catch(error => {
                 dispatch(Edit_Post_Error(error))
                 console.log(error, `error`)
+            })
+    }
+}
+
+
+const Single_Post_Start = () => ({
+    type: PostType.SINGLE_POST_START
+})
+
+const Single_Post_Success = (data) => ({
+    type: PostType.SINGLE_POST_SUCCESS,
+    payload: data
+
+})
+
+const Single_Post_Error = (error) => ({
+    type: PostType.SINGLE_POST_ERROR,
+    payload: error
+})
+
+export const Get_Single_post = () => {
+    return dispatch => {
+        dispatch(Single_Post_Start)
+        axios.get(urlSinglePost)
+            .then((res) => {
+                dispatch(Single_Post_Success(res.data))
+                console.log(res, `response from Single`)
+            })
+            .catch(error => {
+                dispatch(Single_Post_Error(error))
+                console.log(error)
             })
     }
 }
