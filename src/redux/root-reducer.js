@@ -3,6 +3,7 @@ import {persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import postReducer from "./posts/post-reducer";
 import userReducer from "./user/user-reducer";
+import commentsReducer from "./comments/comments-reducer";
 
 
 //blacklist
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     posts: postReducer,
     user: userReducer,
+    comments: commentsReducer,
 
 });
 
