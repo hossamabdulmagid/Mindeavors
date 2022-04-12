@@ -31,7 +31,7 @@ const EditPost = ({UpdateSinglePost}) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        UpdateSinglePost(post, headers, toast)
+        UpdateSinglePost(post, headers)
         toast.success(`Post Updated Successful`)
         navigate('/')
     }
@@ -81,6 +81,6 @@ const EditPost = ({UpdateSinglePost}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    UpdateSinglePost: (data, headers, toast) => dispatch(UpdateSinglePost(data, headers, toast))
+    UpdateSinglePost: (post, headers) => dispatch(UpdateSinglePost(post, headers))
 })
 export default connect(null, mapDispatchToProps)(EditPost);

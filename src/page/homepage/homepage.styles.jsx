@@ -27,20 +27,6 @@ export const RapperHeaderComponent = styled.div`
     margin-bottom: 15px;
   }
 
-  ul {
-    border-bottom: 2px solid limegreen;
-    list-style: none;
-    padding: 10px;
-    margin: 4px;
-
-    &:hover {
-      padding: 10px;
-      box-shadow: 4px 5px limegreen;
-      margin: 4px;
-
-    }
-  }
-
   strong {
     color: lightseagreen;
   }

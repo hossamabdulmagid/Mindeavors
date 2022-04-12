@@ -15,6 +15,8 @@ const INITIAL_STATE = {
         title: "",
         body: ""
     }],
+    data: {}
+
 };
 
 const postReducer = (state = INITIAL_STATE, action) => {
@@ -88,9 +90,30 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: false,
             }
-        case PostType.SINGLE_POST_ERROR:
+        case PostType.DELETE_POST_ERROR:
             return {
                 ...state,
+                error: action.payload,
+            }
+
+
+        case PostType.CREATE_POST_START:
+            return {
+                ...state,
+                loading: true,
+            }
+        case PostType.CREATE_POST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                data: action.payload,
+
+            }
+
+        case PostType.CREATE_POST_ERROR:
+            return {
+                ...state,
+                loading: false,
                 error: action.payload,
             }
         default:

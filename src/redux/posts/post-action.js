@@ -60,11 +60,11 @@ const Edit_Post_Error = (error) => ({
     payload: error
 })
 
-export const UpdateSinglePost = (data, headers) => {
+export const UpdateSinglePost = (post, headers) => {
     return dispatch => {
         dispatch(Edit_Post_Start)
         axios
-            .put(urlUpdated, data, {
+            .put(urlUpdated, post, {
                 headers: headers
             })
             .then((res) => {
@@ -140,4 +140,41 @@ export const Do_Delete_Post = (id) => {
             })
     }
 }
+
+
+const Create_Post_Start = () => ({
+    type: PostType.CREATE_POST_START,
+})
+
+const Create_Post_Success = (data) => ({
+    type: PostType.CREATE_POST_SUCCESS,
+    payload: data,
+})
+const Create_Post_Error = (error) => ({
+    type: PostType.CREATE_POST_ERROR,
+    payload: error
+})
+
+
+export const Do_createPost = (post, headers) => {
+    return dispatch => {
+        dispatch(Create_Post_Start())
+        axios
+            .post(urlCreated, post, {
+                headers: headers
+            })
+            .then((res) => {
+                if (res.status === 201) {
+                    console.log(res, `response from Api`)
+                    dispatch(Create_Post_Success(res))
+                }
+            })
+            .catch(error => {
+                dispatch(Create_Post_Error(error))
+                console.log(error)
+            })
+
+    }
+}
+
 
