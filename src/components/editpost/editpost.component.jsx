@@ -37,37 +37,38 @@ const EditPost = ({UpdateSinglePost}) => {
         navigate('/')
     }
     return (
-        <div className={'container'}>
-            <div className={'row'}>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter title"
-                            onChange={handleChange}
-                            name={"title"}
-                            required
-                        />
+            <div className={'container'}>
+                <div className={'row'}>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter title"
+                                onChange={handleChange}
+                                name={"title"}
+                                required
+                            />
 
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter Body"
-                            onChange={handleChange}
-                            name={"body"}
-                            required
-                        />
-                    </Form.Group>
-                    <Button variant="success" type="submit" style={{margin: '2px'}}>
-                        Save
-                    </Button>
-                    <Button variant="primary" style={{margin: '2px'}} onClick={Cancel}>
-                        Cancel
-                    </Button>
-                </Form>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter Body"
+                                onChange={handleChange}
+                                name={"body"}
+                                required
+                            />
+                        </Form.Group>
+                        <Button variant="success" type="submit" style={{margin: '2px'}}>
+                            Save
+                        </Button>
+                        <Button variant="primary" style={{margin: '2px'}} onClick={Cancel}>
+                            Cancel
+                        </Button>
+                    </Form>
+                </div>
             </div>
-        </div>
+
     )
 }
 

@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
 import Card from "react-bootstrap/Card";
 import {Button, Spinner} from "react-bootstrap";
+import DeletePost from "../deletepost/deletepost.component";
 
 const SinglePost = ({Get_Single_post, singlePost, singlepostLoading}) => {
 
@@ -41,12 +42,16 @@ const SinglePost = ({Get_Single_post, singlePost, singlepostLoading}) => {
                             </Card.Body>
                             <Card.Footer className="text-muted">
                                 <Link className={`btn btn-success`} to={`/edit-post/${singlePost.id}`}>Edit</Link>
-                                <Button className={`btn btn-danger`}>Delete</Button>
+                                <Button className={`btn btn-danger`} onClick={handleShow}>Delete</Button>
                             </Card.Footer>
                         </Card>
                     </RapperHeaderComponent>
                 </div> : <Spinner animation={"border"}/>
             }
+            <DeletePost
+                show={show}
+                handleClose={() => handleClose()}
+            />
         </>
 
     )

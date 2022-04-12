@@ -66,7 +66,7 @@ export const UpdateSinglePost = (data, headers, toast) => {
                 if (res.status === 200) {
                     dispatch(Edit_Post_Success())
                     console.log(res, `response from Api`)
-                    dispatch(toast.success(`resposne status :${res.status} Congrats Post Has been Updated`))
+                    dispatch(toast.success(`resposne status ${res.status} Congrats Post Has been Updated`))
                 }
             })
             .catch(error => {
