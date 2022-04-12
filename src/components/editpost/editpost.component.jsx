@@ -7,9 +7,11 @@ import {toast} from 'react-toastify';
 import {useLocation, useNavigate} from 'react-router-dom';
 
 const EditPost = ({UpdateSinglePost}) => {
+
     const location = useLocation();
+
     const navigate = useNavigate();
-    console.log(location.pathname, `location.path`);
+
     const [post, setPost] = useState({
         title: 'foo',
         body: 'bar',
@@ -20,17 +22,17 @@ const EditPost = ({UpdateSinglePost}) => {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
     }
+
     const handleChange = (event) => {
-        console.log(event.target.value, `eventTargetval While Typing`)
         const {name, value} = event.target;
         setPost({...post, [name]: value})
 
     }
 
-
     const handleSubmit = event => {
         event.preventDefault()
         UpdateSinglePost(post, headers, toast)
+        toast.success(`Post Updated Successful`)
         navigate('/')
     }
 
@@ -48,6 +50,7 @@ const EditPost = ({UpdateSinglePost}) => {
                             placeholder="Enter title"
                             onChange={handleChange}
                             name={"title"}
+                            value={post.title || ""}
                             required
                         />
 
@@ -58,6 +61,8 @@ const EditPost = ({UpdateSinglePost}) => {
                             placeholder="Enter Body"
                             onChange={handleChange}
                             name={"body"}
+                            value={post.body || ""}
+
                             required
                         />
                     </Form.Group>

@@ -76,6 +76,23 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: action.payload
             }
+
+        case PostType.DELETE_POST_START:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case PostType.DELETE_POST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case PostType.SINGLE_POST_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            }
         default:
             return state;
     }
