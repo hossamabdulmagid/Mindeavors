@@ -16,7 +16,7 @@ const Header = ({currentUser}) => {
                         {currentUser ?
                             <>
                                 <Nav.Link
-                                    href="/"
+                                    href="/create-post"
                                     style={{
                                         cursor: 'pointer',
                                         textDecoration: 'none',
