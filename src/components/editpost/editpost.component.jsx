@@ -4,11 +4,12 @@ import {useState} from "react";
 import {UpdateSinglePost} from "../../redux/posts/post-action";
 import {connect} from "react-redux";
 import {toast} from 'react-toastify';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 const EditPost = ({UpdateSinglePost}) => {
+    const location = useLocation();
     const navigate = useNavigate();
-
+    console.log(location.pathname, `location.path`);
     const [post, setPost] = useState({
         title: 'foo',
         body: 'bar',
@@ -34,40 +35,41 @@ const EditPost = ({UpdateSinglePost}) => {
     }
 
     const Cancel = () => {
-        navigate('/')
+        let result = location.pathname.slice(11);
+        navigate(`/posts/${result}`)
     }
     return (
-            <div className={'container'}>
-                <div className={'row'}>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter title"
-                                onChange={handleChange}
-                                name={"title"}
-                                required
-                            />
+        <div className={'container'}>
+            <div className={'row'}>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter title"
+                            onChange={handleChange}
+                            name={"title"}
+                            required
+                        />
 
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter Body"
-                                onChange={handleChange}
-                                name={"body"}
-                                required
-                            />
-                        </Form.Group>
-                        <Button variant="success" type="submit" style={{margin: '2px'}}>
-                            Save
-                        </Button>
-                        <Button variant="primary" style={{margin: '2px'}} onClick={Cancel}>
-                            Cancel
-                        </Button>
-                    </Form>
-                </div>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Body"
+                            onChange={handleChange}
+                            name={"body"}
+                            required
+                        />
+                    </Form.Group>
+                    <Button variant="success" type="submit" style={{margin: '2px'}}>
+                        Save
+                    </Button>
+                    <Button variant="primary" style={{margin: '2px'}} onClick={Cancel}>
+                        Cancel
+                    </Button>
+                </Form>
             </div>
+        </div>
 
     )
 }
