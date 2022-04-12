@@ -10,7 +10,7 @@ const PostList = ({allPosts}) => {
                 return (
                     <div className={"col-md-3"} key={idx}>
                         <RapperHeaderComponent>
-                            <Link to={`/post/${singlePost.id}`} style={{textDecoration: "none",color:'black'}}>
+                            <Link to={`/posts/${singlePost.id}`} style={{textDecoration: "none",color:'black'}}>
                                 <Card>
                                     <Card.Header as="h4">{singlePost.title}</Card.Header>
                                     <Card.Body>

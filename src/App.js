@@ -48,7 +48,7 @@ const App = ({currentUser, setCurrentUser}) => {
                         {/*<Route path={'/signup'} element={<SignUp/>}/>*/}
                         <Route path="/signin" element={currentUser ? <Navigate to="/"/> : <SignIn/>}/>
                         <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp/>}/>
-                        <Route path="/post/:id" element={<EditSinglePost/>}/>
+                        <Route path="/posts/:id" element={<EditSinglePost/>}/>
 
                     </Routes>
                 </header>
