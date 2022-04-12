@@ -46,4 +46,22 @@ export const RapperHeaderComponent = styled.div`
     border-radius: 5px;
   }
 
+  .avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 2px;
+  }
+
+  .comment-content {
+    margin: 25px 5px 25px 5px;
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  .space {
+    border-bottom: 2px solid crimson;
+  
+  }
 `;

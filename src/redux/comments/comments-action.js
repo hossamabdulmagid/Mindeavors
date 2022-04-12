@@ -1,7 +1,7 @@
 import {CommentsType} from "./comments.type";
 import axios from 'axios';
 
-let url = `https://jsonplaceholder.typicode.com/comments`;
+let url = `https://reqres.in/api/users?page=2`;
 
 const Get_Comment_Start = () => ({
     type: CommentsType.GET_COMMENTS_START,
