@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const RapperHeaderComponent = styled.div`
   color: black;
-  margin:5px;
-  padding:5px;
+  margin: 5px;
+  padding: 5px;
 
   h1 {
     padding: 4px;
@@ -17,12 +17,14 @@ export const RapperHeaderComponent = styled.div`
     display: inline-flex;
     margin-bottom: 10px;
   }
-.About{
-  color:white;
-}
+
+  .About {
+    color: white;
+  }
+
   h3 {
     padding: 5px;
-    margin-bottom: 15px;  
+    margin-bottom: 15px;
   }
 
   ul {
@@ -46,4 +48,6 @@ export const RapperHeaderComponent = styled.div`
   .mb-3 {
     margin: 20px;
   }
+
+ 
 `;

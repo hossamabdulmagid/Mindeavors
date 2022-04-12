@@ -20,7 +20,6 @@ const EditSinglePost = ({UpdateSinglePost}) => {
 
     useEffect(() => {
         UpdateSinglePost(data, headers);
-        UpdateSinglePost(data,headers)
     }, [UpdateSinglePost]);
 
     return (

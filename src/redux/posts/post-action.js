@@ -5,7 +5,7 @@ import {toast} from 'react-toastify';
 let url = `https://jsonplaceholder.typicode.com/posts`;
 let urlCreated = `https://jsonplaceholder.typicode.com/posts`;
 let urlUpdated = `https://jsonplaceholder.typicode.com/posts/1`;
-let urlPatch = `https://jsonplaceholder.typicode.com/posts/1`;
+let urlDelete = `https://jsonplaceholder.typicode.com/posts/1`;
 const Post_Start = () => ({
     type: PostType.GET_POST_START,
 })
@@ -22,7 +22,6 @@ const Post_Error = (error) => ({
 
 
 export const Do_get_posts = () => {
-    let hasError = false;
     return dispatch => {
         dispatch(Post_Start())
         axios
@@ -35,10 +34,7 @@ export const Do_get_posts = () => {
             })
             .catch((error) => {
                 dispatch(Post_Error(error))
-
                 dispatch(toast.error(error.toString()))
-
-
             })
     }
 }
