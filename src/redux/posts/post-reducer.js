@@ -31,6 +31,23 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: action.payload,
             }
+        case PostType.EDIT_POST_START:
+            return {
+                ...state,
+                loading: true,
+            }
+        case PostType.EDIT_POST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+
+        case PostType.EDIT_POST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         default:
             return state;
     }
