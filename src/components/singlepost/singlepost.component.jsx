@@ -29,7 +29,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    window.scrollTo(0, 0);
     return (
         <>
             {!singlePostLoading ?

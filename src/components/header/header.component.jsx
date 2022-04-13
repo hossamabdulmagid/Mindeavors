@@ -22,7 +22,7 @@ const Header = ({currentUser}) => {
                                     </Nav.Link>
                                     <Nav.Link onClick={() => auth.signOut()} className={"Nav-link"}>
                                         <span>
-                                            ({currentUser && currentUser.displayName})
+                                            ({currentUser && currentUser.displayName.split(" ")[0]})
                                         </span>
                                         {" logout"}
                                     </Nav.Link>
