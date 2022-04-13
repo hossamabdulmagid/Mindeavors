@@ -1,4 +1,4 @@
-import Logohomepage from '../../homepage.png'
+import LogoHomePage from '../../homepage.png'
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
 import {connect} from 'react-redux';
 import {Do_get_posts} from "../../redux/posts/post-action";
@@ -29,7 +29,6 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
     useEffect(() => {
         Do_get_posts();
 
-
     }, [Do_get_posts])
 
 
@@ -37,7 +36,7 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
         <RapperHeaderComponent className={'container'}>
 
 
-            <img src={Logohomepage} alt={"HomePage"}/>
+            <img src={LogoHomePage} alt={"HomePage"}/>
             <h1 className={"About"}>
                 {title.toUpperCase()}
             </h1>

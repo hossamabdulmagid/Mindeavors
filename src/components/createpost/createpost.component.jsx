@@ -53,6 +53,9 @@ const CreatePost = ({Do_createPost, newPostData}) => {
                     </div>
                     : <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>
+                                Title
+                            </Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter title"
@@ -63,11 +66,15 @@ const CreatePost = ({Do_createPost, newPostData}) => {
 
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>
+                                Content
+                            </Form.Label>
                             <Form.Control
-                                type="text"
+                                as="textarea"
                                 placeholder="Enter Body"
                                 onChange={handleChange}
                                 name={"body"}
+                                className={'textarea'}
                                 required
                             />
                         </Form.Group>
