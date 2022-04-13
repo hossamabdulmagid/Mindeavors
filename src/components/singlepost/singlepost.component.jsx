@@ -54,8 +54,8 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                         >
                                             Delete
                                         </Button>
-                                    </> : <Link to={'/signin'} className={` container btn btn-warning`}>
-                                        <h5>log in to edit or delete post </h5>
+                                    </> : <Link to={'/signin'} className="btn btn-sm-success" size="sm">
+                                        log in to edit or delete post
                                     </Link>
                                 }
                             </Card.Footer>
