@@ -2,69 +2,44 @@ import {Container, Nav} from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar'
 import Mindeavors from "../../Color logo - no background.svg";
 import {auth} from "../../lib/firebase";
+import {RapperHeaderComponent} from "./header.styles";
 
 const Header = ({currentUser}) => {
 
     return (
         <>
-            <Navbar bg="dark" variant={"secondary"}>
-                <Container>
-                    <Navbar.Brand href="/">
-                        <img src={Mindeavors} className="App-logo-navbar" alt="logo" width={180}/>
-                    </Navbar.Brand>
-                    <Nav className="" style={{textAlign: 'right'}}>
-                        {currentUser ?
-                            <>
-                                <Nav.Link
-                                    href="/create-post"
-                                    style={{
-                                        cursor: 'pointer',
-                                        textDecoration: 'none',
-                                        color: 'white',
-                                        margin: '2px'
-                                    }}>
-                                    Create Post
-                                </Nav.Link>
-                                <Nav.Link
-                                    onClick={() => auth.signOut()}
-                                    style={{
-                                        cursor: 'pointer',
-                                        textDecoration: 'none',
-                                        color: 'white',
-                                        margin: '2px'
-                                    }}>
-                                <span style={{color: 'limegreen'}}>
-                                    ({currentUser && currentUser.displayName})
-                                </span>
-                                    {" logout"}
-                                </Nav.Link>
-                            </> :
-                            <>
-                                <Nav.Link
-                                    href="/signin"
-                                    style={{
-                                        cursor: 'pointer',
-                                        textDecoration: 'none',
-                                        color: 'white',
-                                        margin: '2px'
-                                    }}>
-                                    Login
-                                </Nav.Link>
-                                <Nav.Link
-                                    href="/signup"
-                                    style={{
-                                        cursor: 'pointer',
-                                        textDecoration: 'none',
-                                        color: 'white',
-                                        margin: '2px'
-                                    }}>
-                                    Signup
-                                </Nav.Link>
-                            </>
-                        }
-                    </Nav>
-                </Container>
-            </Navbar>
+            <RapperHeaderComponent>
+                <Navbar bg="dark" variant={"secondary"}>
+                    <Container>
+                        <Navbar.Brand href="/">
+                            <img src={Mindeavors} className="App-logo-navbar" alt="logo" width={180}/>
+                        </Navbar.Brand>
+                        <Nav className="Nav">
+                            {currentUser ?
+                                <>
+                                    <Nav.Link href="/create-post" className={"Nav-link"}>
+                                        Create Post
+                                    </Nav.Link>
+                                    <Nav.Link onClick={() => auth.signOut()} className={"Nav-link"}>
+                                        <span>
+                                            ({currentUser && currentUser.displayName})
+                                        </span>
+                                        {" logout"}
+                                    </Nav.Link>
+                                </> :
+                                <>
+                                    <Nav.Link href="/signin" className={"Nav-link"}>
+                                        Login
+                                    </Nav.Link>
+                                    <Nav.Link href="/signup" className={"Nav-link"}>
+                                        Signup
+                                    </Nav.Link>
+                                </>
+                            }
+                        </Nav>
+                    </Container>
+                </Navbar>
+            </RapperHeaderComponent>
         </>
     )
 }

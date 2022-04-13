@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {auth, signInWithGoogle} from '../../lib/firebase';
 import {FcGoogle} from "react-icons/fc";
 import {toast} from 'react-toastify';
-
+import {RapperSignInComponent} from './signin.styles'
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ const SignIn = () => {
     }
 
     return (
-        <div>
+        <RapperSignInComponent>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -75,14 +75,14 @@ const SignIn = () => {
                     Log In
                 </Button>
                 <br/>
-                <Button style={{marginTop: '20px'}} className={'btn btn-light'} onClick={signInWithGoogle}>
-                    <h5 style={{display: 'inline', padding: '4px'}}>
+                <Button className={'btn btn-light'} onClick={signInWithGoogle}>
+                    <h5>
                         <FcGoogle/>
                     </h5>
                     <span>Log in With Google</span>
                 </Button>
             </Form>
-        </div>
+        </RapperSignInComponent>
     )
 }
 

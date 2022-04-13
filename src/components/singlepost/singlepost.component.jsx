@@ -54,7 +54,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                         >
                                             Delete
                                         </Button>
-                                    </> : <Link to={'/signin'} className="btn btn-sm-success" size="sm">
+                                    </> : <Link to={'/signin'} className="btn btn-sm-success">
                                         log in to edit or delete post
                                     </Link>
                                 }
@@ -66,7 +66,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                             <div className={"row"}>
                                                 <div className={'col-sm-4'}>
                                                     <img
-                                                        src={singleComment.avatar.toString()}
+                                                        src={singleComment.avatar}
                                                         alt={"Image Loaded"}
                                                         className={"avatar"}
                                                     />
@@ -79,7 +79,11 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                                 <div className={'col-sm-8'}>
                                                     <p className={'comment-content'}>
                                                         <small>
-                                                            {comments.support.text || ""}
+                                                            {singleComment && singleComment.first_name}
+                                                            {" "}
+                                                            {singleComment && singleComment.email}
+                                                            {" "}
+                                                            {singleComment && singleComment.last_name}
                                                         </small>
                                                     </p>
                                                 </div>

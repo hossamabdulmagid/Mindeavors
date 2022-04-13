@@ -5,7 +5,7 @@ import {Get_Single_post, UpdateSinglePost} from "../../redux/posts/post-action";
 import {connect} from "react-redux";
 import {toast} from 'react-toastify';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
+import {RapperEditPostComponent} from "./editpost.styles";
 import Card from "react-bootstrap/Card";
 
 const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
@@ -50,56 +50,59 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
     }, [Get_Single_post, result, postLoading])
 
     return (
+
         <div className={'container'}>
             <div className={'row'}>
-                {postLoading && postView ? <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>
-                            Title
-                        </Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter title"
-                            onChange={handleChange}
-                            name={"title"}
-                            value={post.title || ""}
-                            required
-                        />
+                <RapperEditPostComponent>
+                    {postLoading && postView ?
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>
+                                    Title
+                                </Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter title"
+                                    onChange={handleChange}
+                                    name={"title"}
+                                    value={post.title || ""}
+                                    required
+                                />
 
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>
-                            Content
-                        </Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            placeholder="Enter Body"
-                            onChange={handleChange}
-                            name={"body"}
-                            style={{height: '200px'}} ////// remove to scss
-                            value={post.body || ""}
-
-                            required
-                        />
-                    </Form.Group>
-                    <Button variant="success" type="submit" style={{margin: '2px'}}>
-                        Save
-                    </Button>
-                    <Button variant="primary" style={{margin: '2px'}} onClick={Cancel}>
-                        Cancel
-                    </Button>
-                </Form> : <div className={"container"}>
-                    <RapperHeaderComponent className={'col-sm-12'}>
-                        <Card>
-                            <Card.Header as="h3">{PostUpdated.title}</Card.Header>
-                            <Card.Body>
-                                <Card.Text>
-                                    <small>{PostUpdated.body}</small>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </RapperHeaderComponent>
-                </div>}
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>
+                                    Content
+                                </Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    placeholder="Enter Body"
+                                    onChange={handleChange}
+                                    name={"body"}
+                                    className={'textarea'}
+                                    value={post.body || ""}
+                                    required
+                                />
+                            </Form.Group>
+                            <Button variant="success" type="submit">
+                                Save
+                            </Button>
+                            <Button variant="primary" onClick={Cancel}>
+                                Cancel
+                            </Button>
+                        </Form> : <div className={"container"}>
+                            <RapperEditPostComponent className={'col-sm-12'}>
+                                <Card>
+                                    <Card.Header as="h3">{PostUpdated.title}</Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>
+                                            <small>{PostUpdated.body}</small>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </RapperEditPostComponent>
+                        </div>}
+                </RapperEditPostComponent>
             </div>
         </div>
 

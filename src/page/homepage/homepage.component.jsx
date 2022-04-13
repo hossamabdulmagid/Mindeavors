@@ -58,7 +58,11 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
             <div className="container-fluid text-center">
                 <div className="row">
                     {filterdPosts.length === 0 && !allPostsLoading ? <h1>No post found matching your filter</h1> : null}
-                    {allPostsLoading ? <Spinner animation={`border`}/> : <PostList allPosts={filterdPosts}/>}
+                    {allPostsLoading ? <>
+                        <div className={'container'}>
+                            <Spinner animation="border" variant="light"/>
+                        </div>
+                    </> : <PostList allPosts={filterdPosts}/>}
 
                 </div>
             </div>

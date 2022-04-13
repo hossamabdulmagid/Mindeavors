@@ -3,9 +3,8 @@ import {useEffect, useState} from "react";
 import {Do_createPost} from "../../redux/posts/post-action";
 import {connect} from 'react-redux'
 import {toast} from "react-toastify";
-import {Button} from 'react-bootstrap'
-import {RapperHeaderComponent} from '../../page/homepage/homepage.styles'
 import Card from "react-bootstrap/Card";
+import {BUTTON} from './createpost.styles'
 
 const CreatePost = ({Do_createPost, newPostData}) => {
 
@@ -41,7 +40,7 @@ const CreatePost = ({Do_createPost, newPostData}) => {
             <div className={'row'}>
                 {newPostData.status === 201 ?
                     <div className={"container"}>
-                        <RapperHeaderComponent className={'col-sm-12'}>
+                        <div className={'col-sm-12'}>
                             <Card>
                                 <Card.Header as="h3">{newPostData.data.title}</Card.Header>
                                 <Card.Body>
@@ -50,7 +49,7 @@ const CreatePost = ({Do_createPost, newPostData}) => {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                        </RapperHeaderComponent>
+                        </div>
                     </div>
                     : <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -72,9 +71,9 @@ const CreatePost = ({Do_createPost, newPostData}) => {
                                 required
                             />
                         </Form.Group>
-                        <Button variant="success" type="submit" style={{margin: '2px'}}>
+                        <BUTTON variant="success" type="submit">
                             Create
-                        </Button>
+                        </BUTTON>
                     </Form>}
             </div>
         </div>
