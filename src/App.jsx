@@ -48,11 +48,8 @@ const App = ({currentUser, setCurrentUser}) => {
                         <Route path="/signin" element={currentUser ? <Navigate to="/"/> : <SignIn/>}/>
                         <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
-
                         <Route path="/edit-post/:id" element={<EditPost/>}/>
                         <Route path="/create-post" element={<CreatePost/>}/>
-
-
                     </Routes>
                 </header>
             </div>

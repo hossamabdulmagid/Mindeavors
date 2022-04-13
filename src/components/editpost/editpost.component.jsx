@@ -15,9 +15,9 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
     const navigate = useNavigate();
 
     const [post, setPost] = useState({
-        title: 'foo',
-        body: 'bar',
-        userId: 1,
+        title: '',
+        body: '',
+        userId: "",
     })
 
     const headers = {
@@ -35,7 +35,7 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
         event.preventDefault()
         UpdateSinglePost(post, headers)
         toast.success(`Post Updated Successful`)
-        // navigate('/')
+        navigate(`/posts/${result}`)
     }
     let result = location.pathname.slice(11);
 
@@ -48,11 +48,15 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
             setPost(postView)
         }
     }, [Get_Single_post, result, postLoading])
+
     return (
         <div className={'container'}>
             <div className={'row'}>
-                {postLoading ? <Form onSubmit={handleSubmit}>
+                {postLoading && postView ? <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>
+                            Title
+                        </Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Enter title"
@@ -64,11 +68,15 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
 
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>
+                            Content
+                        </Form.Label>
                         <Form.Control
-                            type="text"
+                            as="textarea"
                             placeholder="Enter Body"
                             onChange={handleChange}
                             name={"body"}
+                            style={{height: '200px'}} ////// remove to scss
                             value={post.body || ""}
 
                             required

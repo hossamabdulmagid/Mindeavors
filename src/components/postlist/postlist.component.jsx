@@ -8,20 +8,25 @@ const PostList = ({allPosts}) => {
         <>
             {allPosts.map((singlePost, idx) => {
                 return (
-                    <div className={"col-md-3"} key={idx}>
-                        <RapperHeaderComponent>
-                            <Link to={`/posts/${singlePost.id}`} style={{textDecoration: "none", color: 'black'}}>
-                                <Card>
-                                    <Card.Header as="h4">{singlePost.title}</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title></Card.Title>
-                                        <Card.Text>
-                                            <small>{singlePost.body}</small>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </Link>
-                        </RapperHeaderComponent>
+                    <div className={"row bg-light mb-2"} style={{"padding":'10px',"text-align":"left"}} key={idx}>
+                        <div className="col-md-3">
+                            <img src={"https://picsum.photos/286/190?t="+Math.floor(Math.random()*10000)+""} alt={singlePost.title}/>
+                        </div>
+                        <div className="col-md-9 justify-content-lg-end">
+                            <RapperHeaderComponent>
+                                <h4>{singlePost.title}</h4>
+                                <p>
+                                    <small>
+                                        {singlePost.body}
+                                    </small>
+                                </p>
+                                <p style={{"text-align":"right"}}>
+                                    <Link to={`/posts/${singlePost.id}`} style={{textDecoration: "none", color: 'black'}}>
+                                        Read more
+                                    </Link>
+                                </p>
+                            </RapperHeaderComponent>
+                        </div>
                     </div>
                 )
             })}

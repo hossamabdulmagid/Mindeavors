@@ -30,7 +30,6 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
     return (
         <>
             {!singlePostLoading ?
@@ -45,17 +44,20 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
-                                {currentUser ? <>
-                                    <Link className={`btn btn-success`} to={`/edit-post/${singlePost.id}`}>Edit</Link>
-                                    <Button
-                                        className={`btn btn-danger`}
-                                        onClick={handleShow}
-                                    >
-                                        Delete
-                                    </Button>
-                                </> : <Link to={'/signin'} className={` container btn btn-warning`}>
-                                    <h5>log in to edit or delete post </h5>
-                                </Link>}
+                                {currentUser ?
+                                    <>
+                                        <Link className={`btn btn-success`}
+                                              to={`/edit-post/${singlePost.id}`}>Edit</Link>
+                                        <Button
+                                            className={`btn btn-danger`}
+                                            onClick={handleShow}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </> : <Link to={'/signin'} className={` container btn btn-warning`}>
+                                        <h5>log in to edit or delete post </h5>
+                                    </Link>
+                                }
                             </Card.Footer>
                             <div className={"container"}>
                                 {comments && comments.data && comments.data.map((singleComment, idx) => {
@@ -77,7 +79,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                                 <div className={'col-sm-8'}>
                                                     <p className={'comment-content'}>
                                                         <small>
-                                                            {singlePost.body}
+                                                            {comments.support.text || ""}
                                                         </small>
                                                     </p>
                                                 </div>

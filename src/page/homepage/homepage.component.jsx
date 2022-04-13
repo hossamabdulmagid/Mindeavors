@@ -57,7 +57,7 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
             </Form.Group>
             <div className="container-fluid text-center">
                 <div className="row">
-                    {filterdPosts.length === 0 && !allPostsLoading ? <h1>No post found matching you filter</h1> : null}
+                    {filterdPosts.length === 0 && !allPostsLoading ? <h1>No post found matching your filter</h1> : null}
                     {allPostsLoading ? <Spinner animation={`border`}/> : <PostList allPosts={filterdPosts}/>}
 
                 </div>
