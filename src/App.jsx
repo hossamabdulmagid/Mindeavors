@@ -15,6 +15,7 @@ import SinglePost from './components/singlepost/singlepost.component'
 import 'react-toastify/dist/ReactToastify.css';
 import EditPost from "./components/editpost/editpost.component";
 import CreatePost from "./components/createpost/createpost.component";
+import RequiredAuth from "./lib/requiredAuth";
 
 const App = ({currentUser, setCurrentUser}) => {
     let unsubscribeFormAuth = null;
@@ -49,9 +50,7 @@ const App = ({currentUser, setCurrentUser}) => {
                         <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
                         <Route path="/edit-post/:id" element={<EditPost/>}/>
-                        <Route path="/create-post" element={<CreatePost/>}/>
-                        <Route path="/create-post"
-                               element={currentUser ? <Navigate to="/create-post"/> : <CreatePost/>}/>
+                        <Route path="/create-post" element={<RequiredAuth> <CreatePost/></RequiredAuth>}/>
                     </Routes>
                 </header>
             </div>
