@@ -4,7 +4,7 @@ import {Do_createPost} from "../../redux/posts/post-action";
 import {connect} from 'react-redux'
 import {toast} from "react-toastify";
 import Card from "react-bootstrap/Card";
-import {BUTTON} from './createpost.styles'
+import {BUTTON, RapperCreatePostComponent} from './createpost.styles'
 
 const CreatePost = ({Do_createPost, newPostData}) => {
 
@@ -36,7 +36,7 @@ const CreatePost = ({Do_createPost, newPostData}) => {
 
     return (
 
-        <div className={'container'}>
+        <RapperCreatePostComponent className={'container'}>
             <div className={'row'}>
                 {newPostData.status === 201 ?
                     <div className={"container"}>
@@ -83,7 +83,7 @@ const CreatePost = ({Do_createPost, newPostData}) => {
                         </BUTTON>
                     </Form>}
             </div>
-        </div>
+        </RapperCreatePostComponent>
 
     )
 

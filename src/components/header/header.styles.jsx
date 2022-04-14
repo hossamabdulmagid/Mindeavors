@@ -6,7 +6,7 @@ export const RapperHeaderComponent = styled.div`
   .Nav {
     text-align: right;
   }
-
+ 
   .Nav-link {
     cursor: pointer;
     text-decoration: none;

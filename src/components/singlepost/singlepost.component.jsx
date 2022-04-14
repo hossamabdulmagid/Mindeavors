@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 
 import {Get_Single_post} from '../../redux/posts/post-action';
 
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 import {connect} from "react-redux";
 import {RapperHeaderComponent} from "../../page/homepage/homepage.styles";
@@ -11,12 +11,12 @@ import {Button, Spinner} from "react-bootstrap";
 import DeletePost from "../deletepost/deletepost.component";
 import {Do_Get_Comments} from "../../redux/comments/comments-action";
 
-
 const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comments, comments = [], currentUser}) => {
 
 
     const location = useLocation();
 
+    const navigate = useNavigate();
     const id = location.pathname;
 
     useEffect(() => {
@@ -30,6 +30,10 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     window.scrollTo(0, 0);
+
+    const goToSignInPage = () => {
+        navigate('/')
+    }
     return (
         <>
             {!singlePostLoading ?
@@ -54,9 +58,9 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                         >
                                             Delete
                                         </Button>
-                                    </> : <Link to={'/signin'} className="btn btn-sm-success">
+                                    </> : <Button onClick={goToSignInPage} variant="warning" size={'sm'}>
                                         log in to edit or delete post
-                                    </Link>
+                                    </Button>
                                 }
                             </Card.Footer>
                             <div className={"container"}>
