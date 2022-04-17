@@ -12,7 +12,7 @@ import DeletePost from "../deletepost/deletepost.component";
 import {Do_Get_Comments} from "../../redux/comments/comments-action";
 
 const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comments, comments = [], currentUser}) => {
-
+    console.log(singlePost, `singlePost`)
     const location = useLocation();
 
     const navigate = useNavigate();

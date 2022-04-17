@@ -7,10 +7,13 @@ import {toast} from "react-toastify";
 const DeletePost = ({show, handleClose, singlePost, Do_Delete_Post}) => {
     const navigate = useNavigate();
     let id = singlePost.id;
+    const headers = {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwMTYzNzQ4LCJleHAiOjE2NTI3NTU3NDh9.Xwmx1beDfZ4MD-PDbuCNchIZPckh6A9Gi0wgSm-1syg"
+    };
     const HandleDeleteReq = () => {
-        Do_Delete_Post(id)
+        Do_Delete_Post(id, headers)
 
-        toast.success(`post has been Deleted ${singlePost.title}`)
+        toast.success(`post has been Deleted ${singlePost.attributes.title}`)
         handleClose();
         navigate('/')
     }
@@ -22,10 +25,10 @@ const DeletePost = ({show, handleClose, singlePost, Do_Delete_Post}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <h4>
-                        {singlePost && singlePost.title}
+                        {singlePost && singlePost.attributes && singlePost.attributes.title}
                     </h4>
                     <small>
-                        {singlePost && singlePost.body}
+                        {singlePost && singlePost.attributes && singlePost.attributes.content}
                     </small>
                 </Modal.Body>
                 <Modal.Footer>
@@ -42,7 +45,7 @@ const DeletePost = ({show, handleClose, singlePost, Do_Delete_Post}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    Do_Delete_Post: (id) => dispatch(Do_Delete_Post(id))
+    Do_Delete_Post: (id, headers) => dispatch(Do_Delete_Post(id, headers))
 })
 
 export default connect(null, mapDispatchToProps)(DeletePost);

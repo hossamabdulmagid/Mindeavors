@@ -8,7 +8,7 @@ let urlCreated = `http://localhost:1337/api/posts`;
 
 let urlUpdated = `http://localhost:1337/api/posts/`;
 
-let urlDelete = `https://jsonplaceholder.typicode.com/posts/`;
+let urlDelete = `http://localhost:1337/api/posts/`;
 
 let urlSinglePost = `http://localhost:1337/api/posts/`;
 
@@ -131,15 +131,19 @@ const Delete_Post_Error = (error) => ({
     payload: error
 })
 
-export const Do_Delete_Post = (id) => {
+export const Do_Delete_Post = (id, headers) => {
     console.log(`${id} got Called`)
     return dispatch => {
         dispatch(Delete_Post_Start())
         axios
-            .delete(`${urlDelete}/${id}`)
+            .delete(`${urlDelete}${id}`,
+                {
+                    headers: headers
+                })
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(Delete_Post_Success())
+                    dispatch(Do_get_posts())
                     console.log(res, `response From api`)
                 }
             })
