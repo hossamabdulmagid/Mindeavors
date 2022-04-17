@@ -4,7 +4,7 @@ import {toast} from 'react-toastify';
 
 let url = `http://localhost:1337/api/posts/`;
 
-let urlCreated = `https://jsonplaceholder.typicode.com/posts`;
+let urlCreated = `http://localhost:1337/api/posts`;
 
 let urlUpdated = `http://localhost:1337/api/posts/`;
 
@@ -67,9 +67,10 @@ export const UpdateSinglePost = (id, headers, data) => {
         dispatch(Edit_Post_Start)
         axios
             .put(`${urlUpdated}${id}`,
-            {
+                {
                     data: data
-                }, {
+                },
+                {
                     headers: headers
                 })
             .then((res) => {
@@ -163,15 +164,19 @@ const Create_Post_Error = (error) => ({
 })
 
 
-export const Do_createPost = (post, headers) => {
+export const Do_createPost = (data, headers) => {
     return dispatch => {
         dispatch(Create_Post_Start())
         axios
-            .post(urlCreated, post, {
-                headers: headers
-            })
+            .post(`${urlCreated}`,
+                {
+                    data: data
+                },
+                {
+                    headers: headers
+                })
             .then((res) => {
-                if (res.status === 201) {
+                if (res.status === 200) {
                     console.log(res, `response from Api`)
                     dispatch(Create_Post_Success(res))
                 }

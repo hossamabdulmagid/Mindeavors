@@ -2,33 +2,33 @@ import Form from "react-bootstrap/Form";
 import {useEffect, useState} from "react";
 import {Do_createPost} from "../../redux/posts/post-action";
 import {connect} from 'react-redux'
-import {toast} from "react-toastify";
-import Card from "react-bootstrap/Card";
+import {useNavigate} from "react-router-dom";
 import {BUTTON, RapperCreatePostComponent} from './createpost.styles'
 
 const CreatePost = ({Do_createPost, newPostData}) => {
-
-    const [post, setPost] = useState({
+    const navigate = useNavigate();
+    const [data, setData] = useState({
         title: '',
-        body: '',
-        userId: 1,
+        content: '',
     })
 
     const headers = {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
+
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwMTYzNzQ4LCJleHAiOjE2NTI3NTU3NDh9.Xwmx1beDfZ4MD-PDbuCNchIZPckh6A9Gi0wgSm-1syg"
+
     };
 
 
     const handleChange = event => {
         const {name, value} = event.target;
-        setPost({...post, [name]: value})
+        setData({...data, [name]: value})
     }
 
     const handleSubmit = event => {
         event.preventDefault();
-        Do_createPost(post, headers)
-        toast.success(`Post Created Successful`)
+        Do_createPost(data, headers)
+        navigate('/')
+        // toast.success(`Post Created Successful`)
     }
     useEffect(() => {
 
@@ -38,50 +38,37 @@ const CreatePost = ({Do_createPost, newPostData}) => {
 
         <RapperCreatePostComponent className={'container'}>
             <div className={'row'}>
-                {newPostData.status === 201 ?
-                    <div className={"container"}>
-                        <div className={'col-sm-12'}>
-                            <Card>
-                                <Card.Header as="h3">{newPostData.data.title}</Card.Header>
-                                <Card.Body>
-                                    <Card.Text>
-                                        <small>{newPostData.data.body}</small>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </div>
-                    </div>
-                    : <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>
-                                Title
-                            </Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter title"
-                                onChange={handleChange}
-                                name={"title"}
-                                required
-                            />
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>
+                            Title
+                        </Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter title"
+                            onChange={handleChange}
+                            name={"title"}
+                            required
+                        />
 
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>
-                                Content
-                            </Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                placeholder="Enter Body"
-                                onChange={handleChange}
-                                name={"body"}
-                                className={'textarea'}
-                                required
-                            />
-                        </Form.Group>
-                        <BUTTON variant="success" type="submit">
-                            Create
-                        </BUTTON>
-                    </Form>}
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>
+                            Content
+                        </Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            placeholder="Enter Body"
+                            onChange={handleChange}
+                            name={"content"}
+                            className={'textarea'}
+                            required
+                        />
+                    </Form.Group>
+                    <BUTTON variant="success" type="submit">
+                        Create
+                    </BUTTON>
+                </Form>
             </div>
         </RapperCreatePostComponent>
 
@@ -94,6 +81,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    Do_createPost: (post, headers) => dispatch(Do_createPost(post, headers)),
+    Do_createPost: (data, headers) => dispatch(Do_createPost(data, headers)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
