@@ -13,9 +13,8 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
         if (!filterItem) {
             return allPosts;
         }
-        return allPosts.filter((allPosts) => allPosts && (allPosts.title.includes(filterItem) || allPosts.body.includes(filterItem)));
+        return allPosts.filter((allPosts) => allPosts && (allPosts.attributes.title.includes(filterItem) || allPosts.attributes.content.includes(filterItem)));
     }
-
     const [filterItem, setFilterItem] = useState("");
 
     const filterdPosts = filterPosts(filterItem);
@@ -34,8 +33,6 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
 
     return (
         <RapperHeaderComponent className={'container'}>
-
-
             <img src={LogoHomePage} alt={"HomePage"}/>
             <h1 className={"About"}>
                 {title.toUpperCase()}

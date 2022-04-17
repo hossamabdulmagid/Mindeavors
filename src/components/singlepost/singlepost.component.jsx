@@ -13,27 +13,33 @@ import {Do_Get_Comments} from "../../redux/comments/comments-action";
 
 const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comments, comments = [], currentUser}) => {
 
-
     const location = useLocation();
 
     const navigate = useNavigate();
+
+
     const id = location.pathname;
+
 
     useEffect(() => {
         Get_Single_post(id);
+
         Do_Get_Comments()
+
     }, [Get_Single_post, id, Do_Get_Comments]);
 
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
+
     const handleShow = () => setShow(true);
     window.scrollTo(0, 0);
 
     const goToSignInPage = () => {
         navigate('/signin')
     }
+
     return (
         <>
             {!singlePostLoading ?

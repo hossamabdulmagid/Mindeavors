@@ -2,7 +2,7 @@ import {PostType} from "./post-type";
 import axios from "axios";
 import {toast} from 'react-toastify';
 
-let url = `https://jsonplaceholder.typicode.com/posts`;
+let url = `http://localhost:1337/api/posts/`;
 
 let urlCreated = `https://jsonplaceholder.typicode.com/posts`;
 
@@ -34,8 +34,9 @@ export const Do_get_posts = () => {
         axios
             .get(url)
             .then((res) => {
+                console.log(res,`response l ll`)
                 if (res.status === 200) {
-                    dispatch(Post_Success(res.data))
+                    dispatch(Post_Success(res.data.data))
                 }
 
             })
