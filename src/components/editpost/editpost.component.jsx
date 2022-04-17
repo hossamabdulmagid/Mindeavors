@@ -20,7 +20,7 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
 
     const handleChange = (event) => {
         const {name, value} = event.target;
-        setdata({...data, [name]: value})
+        setdata({data, [name]: value})
         console.log(data, `post while changing input`)
     }
     let id = location.pathname.slice(11);
@@ -58,7 +58,7 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
                                 placeholder="Enter title"
                                 onChange={handleChange}
                                 name={"title"}
-                                defaultValue={postView.attributes.title || ""}
+                                defaultValue={postView.attributes.title}
                                 required
                             />
 
@@ -73,7 +73,7 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
                                 onChange={handleChange}
                                 name={"content"}
                                 className={'textarea'}
-                                defaultValue={postView.attributes.content || ""}
+                                defaultValue={postView.attributes.content}
                                 required
                             />
                         </Form.Group>
