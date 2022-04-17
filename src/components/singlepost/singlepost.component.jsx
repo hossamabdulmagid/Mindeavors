@@ -32,7 +32,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
     window.scrollTo(0, 0);
 
     const goToSignInPage = () => {
-        navigate('/')
+        navigate('/signin')
     }
     return (
         <>
