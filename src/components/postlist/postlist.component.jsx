@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import {RapperPostListComponent} from './postlist.styles';
+import {IconClock, RapperPostListComponent} from './postlist.styles';
 import Moment from 'react-moment';
 import Card from 'react-bootstrap/Card'
 
@@ -10,7 +10,7 @@ const PostList = ({allPosts}) => {
                 return (
                     <div className={"row bg-light mb-2"} style={{}} key={idx}>
                         <div className="col-md-3">
-                            <img src={"https://picsum.photos/286/190?t=" + Math.floor(Math.random() * 10000) + ""}
+                            <img src={"https://picsum.photos/280/187?t=" + Math.floor(Math.random() * 10000) + ""}
                                  alt={`${singlePost && singlePost.attributes && singlePost.attributes.title}`}/>
                         </div>
                         <div className="col-md-9 justify-content-lg-end">
@@ -30,11 +30,13 @@ const PostList = ({allPosts}) => {
                                 </p>
                             </RapperPostListComponent>
                         </div>
-                        <Card.Footer className="text-muted"> Create At : {" "}
+                        <Card.Footer className="text-muted">
+                            <IconClock/>
                             <Moment
                                 format="MMMM Do YYYY, h:mm a">
                                 {singlePost && singlePost.attributes && singlePost.attributes.createdAt}
-                            </Moment></Card.Footer>
+                            </Moment>
+                        </Card.Footer>
 
                     </div>
                 )

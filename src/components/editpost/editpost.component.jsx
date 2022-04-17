@@ -3,10 +3,8 @@ import {Button} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {Get_Single_post, UpdateSinglePost} from "../../redux/posts/post-action";
 import {connect} from "react-redux";
-import {toast} from 'react-toastify';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {RapperEditPostComponent} from "./editpost.styles";
-import Card from "react-bootstrap/Card";
 
 const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
 
@@ -14,94 +12,78 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView}) => {
 
     const navigate = useNavigate();
 
-    const [post, setPost] = useState({
+    const [data, setdata] = useState({
         title: '',
-        body: '',
-        userId: "",
-    })
+        content: '',
 
-    const headers = {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-    }
+    })
 
     const handleChange = (event) => {
         const {name, value} = event.target;
-        setPost({...post, [name]: value})
-
+        setdata({...data, [name]: value})
+        console.log(data, `post while changing input`)
     }
+    let id = location.pathname.slice(11);
 
     const handleSubmit = event => {
         event.preventDefault()
-        UpdateSinglePost(post, headers)
-        toast.success(`Post Updated Successful`)
-        navigate(`/posts/${result}`)
+        UpdateSinglePost(id, headers, data)
+        // toast.success(`Post Updated Successful`)
+        navigate(`/posts/${id}`)
     }
-    let result = location.pathname.slice(11);
+    const headers = {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwMTYzNzQ4LCJleHAiOjE2NTI3NTU3NDh9.Xwmx1beDfZ4MD-PDbuCNchIZPckh6A9Gi0wgSm-1syg"
+    }
 
     const Cancel = () => {
-        navigate(`/posts/${result}`)
+        navigate(`/posts/${id}`)
     }
     useEffect(() => {
-        Get_Single_post(result);
-        return () => {
-            setPost(postView)
-        }
-    }, [Get_Single_post, result, postLoading])
+        Get_Single_post(id);
+
+    }, [Get_Single_post, id, postLoading])
 
     return (
 
         <div className={'container'}>
             <div className={'row'}>
                 <RapperEditPostComponent>
-                    {postLoading && postView ?
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>
-                                    Title
-                                </Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter title"
-                                    onChange={handleChange}
-                                    name={"title"}
-                                    value={post.title || ""}
-                                    required
-                                />
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>
+                                Title
+                            </Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter title"
+                                onChange={handleChange}
+                                name={"title"}
+                                defaultValue={postView.attributes.title || ""}
+                                required
+                            />
 
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>
-                                    Content
-                                </Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    placeholder="Enter Body"
-                                    onChange={handleChange}
-                                    name={"body"}
-                                    className={'textarea'}
-                                    value={post.body || ""}
-                                    required
-                                />
-                            </Form.Group>
-                            <Button variant="success" type="submit">
-                                Save
-                            </Button>
-                            <Button variant="primary" onClick={Cancel}>
-                                Cancel
-                            </Button>
-                        </Form> : <div className={"container"}>
-                            <RapperEditPostComponent className={'col-sm-12'}>
-                                <Card>
-                                    <Card.Header as="h3">{PostUpdated.title}</Card.Header>
-                                    <Card.Body>
-                                        <Card.Text>
-                                            <small>{PostUpdated.body}</small>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </RapperEditPostComponent>
-                        </div>}
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>
+                                Content
+                            </Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                placeholder="Enter Body"
+                                onChange={handleChange}
+                                name={"content"}
+                                className={'textarea'}
+                                defaultValue={postView.attributes.content || ""}
+                                required
+                            />
+                        </Form.Group>
+                        <Button variant="success" type="submit">
+                            Save
+                        </Button>
+                        <Button variant="primary" onClick={Cancel}>
+                            Cancel
+                        </Button>
+                    </Form>
                 </RapperEditPostComponent>
             </div>
         </div>
@@ -115,7 +97,7 @@ const mapStataToProps = state => ({
     postView: state.posts.singlePost,
 })
 const mapDispatchToProps = dispatch => ({
-    UpdateSinglePost: (post, headers) => dispatch(UpdateSinglePost(post, headers)),
-    Get_Single_post: (result) => dispatch(Get_Single_post(result))
+    UpdateSinglePost: (id, headers, data) => dispatch(UpdateSinglePost(id, headers, data)),
+    Get_Single_post: (id) => dispatch(Get_Single_post(id))
 })
 export default connect(mapStataToProps, mapDispatchToProps)(EditPost);

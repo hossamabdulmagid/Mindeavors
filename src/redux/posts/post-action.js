@@ -6,11 +6,11 @@ let url = `http://localhost:1337/api/posts/`;
 
 let urlCreated = `https://jsonplaceholder.typicode.com/posts`;
 
-let urlUpdated = `https://jsonplaceholder.typicode.com/posts/1`;
+let urlUpdated = `http://localhost:1337/api/posts/`;
 
 let urlDelete = `https://jsonplaceholder.typicode.com/posts/`;
 
-let urlSinglePost = `https://jsonplaceholder.typicode.com`;
+let urlSinglePost = `http://localhost:1337/api/posts/`;
 
 
 const Post_Start = () => ({
@@ -34,7 +34,7 @@ export const Do_get_posts = () => {
         axios
             .get(url)
             .then((res) => {
-                console.log(res,`response l ll`)
+                console.log(res, `response l ll`)
                 if (res.status === 200) {
                     dispatch(Post_Success(res.data.data))
                 }
@@ -62,16 +62,21 @@ const Edit_Post_Error = (error) => ({
     payload: error
 })
 
-export const UpdateSinglePost = (post, headers) => {
+export const UpdateSinglePost = (id, headers, data) => {
     return dispatch => {
         dispatch(Edit_Post_Start)
         axios
-            .put(urlUpdated, post, {
-                headers: headers
-            })
+            .put(`${urlUpdated}${id}`,
+            {
+                    data: data
+                }, {
+                    headers: headers
+                })
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(Edit_Post_Success(res.data))
+
+                    dispatch(Get_Single_post(id))
                     console.log(res, `response from Api`)
                 }
             })
@@ -102,7 +107,7 @@ export const Get_Single_post = (id) => {
         dispatch(Single_Post_Start)
         axios.get(`${urlSinglePost}${id}`)
             .then((res) => {
-                dispatch(Single_Post_Success(res.data))
+                dispatch(Single_Post_Success(res.data.data))
                 console.log(res, `response from Single`)
             })
             .catch(error => {

@@ -17,9 +17,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
 
     const navigate = useNavigate();
 
-
-    const id = location.pathname;
-
+    let id = location.pathname.slice(7);
 
     useEffect(() => {
         Get_Single_post(id);
@@ -34,6 +32,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
     const handleClose = () => setShow(false);
 
     const handleShow = () => setShow(true);
+
     window.scrollTo(0, 0);
 
     const goToSignInPage = () => {
@@ -46,11 +45,12 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                 <div className={"container"}>
                     <RapperHeaderComponent className={'col-sm-10'}>
                         <Card>
-                            <Card.Header as="h4">{singlePost.title}</Card.Header>
+                            <Card.Header
+                                as="h4">{singlePost && singlePost.attributes && singlePost.attributes.title}</Card.Header>
                             <Card.Body>
                                 <Card.Text>
 
-                                    <small>{singlePost.body}</small>
+                                    <small>{singlePost && singlePost.attributes && singlePost.attributes.content}</small>
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
@@ -122,8 +122,6 @@ const mapStateToProps = state => ({
     singlePostLoading: state.posts.loading,
     comments: state.comments.comments,
     currentUser: state.user.currentUser,
-
-
 })
 const mapDispatchToProps = dispatch => ({
     Get_Single_post: (id) => dispatch(Get_Single_post(id)),
