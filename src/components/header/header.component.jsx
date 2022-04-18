@@ -4,12 +4,11 @@ import Mindeavors from "../../Color logo - no background.svg";
 import {auth} from "../../lib/firebase";
 import {RapperHeaderComponent} from "./header.styles";
 
-const Header = ({currentUser}) => {
-
+const Header = ({currentUser, JWT}) => {
+    console.log(JWT, `JWT`)
     return (
         <>
             <RapperHeaderComponent>
-
                 <Navbar collapseOnSelect bg="dark" expand="lg" variant="dark">
                     <Container>
                         <Navbar.Brand href="/">
@@ -19,14 +18,14 @@ const Header = ({currentUser}) => {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Col/>
                             <Nav className="me-auto Nav">
-                                {currentUser ?
+                                {JWT ?
                                     <>
                                         <Nav.Link href="/create-post" className={"Nav-link Nav"}>
                                             Create Post
                                         </Nav.Link>
                                         <Nav.Link onClick={() => auth.signOut()} className={"Nav-link"}>
                                         <span>
-                                            ({currentUser && currentUser.displayName})
+                                            ({JWT && JWT.user && JWT.user.username})
                                             </span>
                                             {" logout"}
                                         </Nav.Link>

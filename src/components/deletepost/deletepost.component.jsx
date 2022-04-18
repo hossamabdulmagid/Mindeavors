@@ -1,14 +1,16 @@
 import {Button, Modal} from 'react-bootstrap'
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {Do_Delete_Post} from "../../redux/posts/post-action";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
 const DeletePost = ({show, handleClose, singlePost, Do_Delete_Post}) => {
+    const JWT = useSelector((state) => state.user.strapiUser)
+
     const navigate = useNavigate();
     let id = singlePost.id;
     const headers = {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwMTYzNzQ4LCJleHAiOjE2NTI3NTU3NDh9.Xwmx1beDfZ4MD-PDbuCNchIZPckh6A9Gi0wgSm-1syg"
+        "Authorization": `Bearer ${JWT.jwt}`
     };
     const HandleDeleteReq = () => {
         Do_Delete_Post(id, headers)

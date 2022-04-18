@@ -2,19 +2,22 @@ import {useState} from 'react';
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
-import {auth, signInWithGoogle} from '../../lib/firebase';
-import {FcGoogle} from "react-icons/fc";
 import {toast} from 'react-toastify';
 import {RapperSignInComponent} from './signin.styles'
+import {useDispatch} from "react-redux";
+import {Do_login} from "../../redux/user/user-action";
 
-const SignIn = () => {
+const SignIn = ({}) => {
+    const dispatch = useDispatch()
+
     const navigate = useNavigate();
 
     const [userCred, setUserCred] = useState({
-        email: "",
+        identifier: "",
         password: "",
     });
-    const {email, password} = userCred;
+
+    const {identifier, password} = userCred;
 
     const handleChange = event => {
         const {name, value} = event.target;
@@ -31,9 +34,10 @@ const SignIn = () => {
             return;
         }
         try {
-            await auth.signInWithEmailAndPassword(email, password);
-            toast.success(`welcome ${email.toString()}`)
-            // navigate('/')
+            // await auth.signInWithEmailAndPassword(identifier, password);
+            dispatch(Do_login(userCred))
+            toast.success(`welcome ${identifier.toString()}`)
+            navigate('/');
 
         } catch (error) {
             console.log(error, `this an error`);
@@ -43,6 +47,7 @@ const SignIn = () => {
 
         }
         console.log(userCred, `user Submit Login Wating Api`)
+
     }
 
     return (
@@ -51,10 +56,10 @@ const SignIn = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
-                        type="email"
+                        type="text"
                         placeholder="Enter email"
                         onChange={handleChange}
-                        name={"email"}
+                        name={"identifier"}
                         required
                     />
                     <Form.Text className="text-muted">
@@ -74,13 +79,13 @@ const SignIn = () => {
                 <Button variant="primary" type="submit">
                     Log In
                 </Button>
-                <br/>
-                <Button className={'btn btn-light'} onClick={signInWithGoogle}>
-                    <h5>
-                        <FcGoogle/>
-                    </h5>
-                    <span>Log in With Google</span>
-                </Button>
+                {/*<br/>*/}
+                {/*<Button className={'btn btn-light'} onClick={signInWithGoogle}>*/}
+                {/*    <h5>*/}
+                {/*        <FcGoogle/>*/}
+                {/*    </h5>*/}
+                {/*    <span>Log in With Google</span>*/}
+                {/*</Button>*/}
             </Form>
         </RapperSignInComponent>
     )

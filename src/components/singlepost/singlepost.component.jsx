@@ -11,8 +11,16 @@ import {Button, Spinner} from "react-bootstrap";
 import DeletePost from "../deletepost/deletepost.component";
 import {Do_Get_Comments} from "../../redux/comments/comments-action";
 
-const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comments, comments = [], currentUser}) => {
-    console.log(singlePost, `singlePost`)
+const SinglePost = ({
+                        Get_Single_post,
+                        singlePost,
+                        singlePostLoading,
+                        Do_Get_Comments,
+                        comments = [],
+                        currentUser,
+                        JWT
+                    }) => {
+
     const location = useLocation();
 
     const navigate = useNavigate();
@@ -39,6 +47,7 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
         navigate('/signin')
     }
 
+
     return (
         <>
             {!singlePostLoading ?
@@ -49,12 +58,11 @@ const SinglePost = ({Get_Single_post, singlePost, singlePostLoading, Do_Get_Comm
                                 as="h4">{singlePost && singlePost.attributes && singlePost.attributes.title}</Card.Header>
                             <Card.Body>
                                 <Card.Text>
-
                                     <small>{singlePost && singlePost.attributes && singlePost.attributes.content}</small>
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
-                                {currentUser ?
+                                {JWT ?
                                     <>
                                         <Link className={`btn btn-success`}
                                               to={`/edit-post/${singlePost.id}`}>Edit</Link>
@@ -122,6 +130,8 @@ const mapStateToProps = state => ({
     singlePostLoading: state.posts.loading,
     comments: state.comments.comments,
     currentUser: state.user.currentUser,
+    JWT: state.user.strapiUser,
+
 })
 const mapDispatchToProps = dispatch => ({
     Get_Single_post: (id) => dispatch(Get_Single_post(id)),

@@ -5,17 +5,17 @@ import {connect} from 'react-redux'
 import {useNavigate} from "react-router-dom";
 import {BUTTON, RapperCreatePostComponent} from './createpost.styles'
 
-const CreatePost = ({Do_createPost, newPostData}) => {
+const CreatePost = ({Do_createPost, newPostData, JWT}) => {
+
     const navigate = useNavigate();
+
     const [data, setData] = useState({
         title: '',
         content: '',
     })
 
     const headers = {
-
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwMTYzNzQ4LCJleHAiOjE2NTI3NTU3NDh9.Xwmx1beDfZ4MD-PDbuCNchIZPckh6A9Gi0wgSm-1syg"
-
+        "Authorization": `Bearer ${JWT.jwt}`
     };
 
 
@@ -30,6 +30,7 @@ const CreatePost = ({Do_createPost, newPostData}) => {
         navigate('/')
         // toast.success(`Post Created Successful`)
     }
+
     useEffect(() => {
 
     }, [newPostData.status])
@@ -77,7 +78,8 @@ const CreatePost = ({Do_createPost, newPostData}) => {
 }
 
 const mapStateToProps = state => ({
-    newPostData: state.posts.data
+    newPostData: state.posts.data,
+    JWT: state.user.strapiUser,
 })
 
 const mapDispatchToProps = dispatch => ({

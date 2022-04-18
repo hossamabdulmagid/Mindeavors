@@ -5,8 +5,8 @@ import Homepage from "./page/homepage/homepage.component";
 import './App.css';
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './redux/user/user-selector';
-import {connect} from 'react-redux';
-import setCurrentUser from './redux/user/user-action';
+import {connect, useSelector} from 'react-redux';
+import {setCurrentUser} from './redux/user/user-action';
 import {useEffect} from "react";
 import {auth, createUserProfileDocument} from './lib/firebase'
 import SignUp from "./page/signup/signup.component";
@@ -16,8 +16,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditPost from "./components/editpost/editpost.component";
 import CreatePost from "./components/createpost/createpost.component";
 import RequiredAuth from "./lib/requiredAuth";
-
 const App = ({currentUser, setCurrentUser}) => {
+    const JWT = useSelector((state) => state.user.strapiUser)
+
     let unsubscribeFormAuth = null;
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const App = ({currentUser, setCurrentUser}) => {
     return (
         <>
             <ToastContainer/>
-            <Header currentUser={currentUser}/>
+            <Header currentUser={currentUser} JWT={JWT}/>
             <div className="App">
                 <header className="App-header">
                     <Routes>
@@ -61,6 +62,7 @@ const App = ({currentUser, setCurrentUser}) => {
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
