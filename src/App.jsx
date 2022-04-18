@@ -47,8 +47,8 @@ const App = ({currentUser, setCurrentUser}) => {
                 <header className="App-header">
                     <Routes>
                         <Route path={'/'} exact element={<Homepage/>}/>
-                        <Route path="/signin" element={currentUser ? <Navigate to="/"/> : <SignIn/>}/>
-                        <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp/>}/>
+                        <Route path="/signin" element={JWT ? <Navigate to="/"/> : <SignIn/>}/>
+                        <Route path="/signup" element={JWT ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
                         <Route path="/edit-post/:id" element={<EditPost/>}/>
                         <Route path="/create-post" element={<RequiredAuth> <CreatePost/></RequiredAuth>}/>

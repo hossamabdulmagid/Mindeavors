@@ -12,7 +12,6 @@ const SignUp = () => {
         displayName: '',
         email: '',
         password: '',
-        confirmPassword: '',
     });
 
     const handleChange = event => {
@@ -24,10 +23,7 @@ const SignUp = () => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (password !== confirmPassword) {
-            toast.warn(`passwords don't match`);
-            return;
-        }
+
         if (password.length < 6) {
             toast.warn(`The password must be 6 to 32 characters long`)
             return;
@@ -87,16 +83,7 @@ const SignUp = () => {
                     required
                 />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    placeholder="Re type Password"
-                    onChange={handleChange}
-                    name={"confirmPassword"}
-                    required
-                />
-            </Form.Group>
+
             <Button variant="primary" type="submit">
                 Sign Up
             </Button>

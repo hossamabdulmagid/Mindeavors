@@ -36,8 +36,13 @@ export const Do_login = (userCred) => {
                 console.log('User token', response.data.jwt);
             })
             .catch((error) => {
-                dispatch(Login_Error(error))
-                console.log('An error occurred:', error.response);
+                dispatch(Login_Error(error.response.data.error.name))
+                console.log('An error occurred:', error.response.data.error.name);
             });
     }
 }
+
+
+export const DoLogout = () => ({
+    type: UserType.USER_LOGOUT,
+})

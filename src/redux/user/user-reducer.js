@@ -46,6 +46,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 error: action.payload
             }
+
+
+        case UserType.USER_LOGOUT:
+            return {strapiUser: null}
         default:
             return state;
     }

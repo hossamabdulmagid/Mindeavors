@@ -2,16 +2,18 @@ import {useState} from 'react';
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
+import {auth, signInWithGoogle} from '../../lib/firebase';
+import {FcGoogle} from "react-icons/fc";
 import {toast} from 'react-toastify';
 import {RapperSignInComponent} from './signin.styles'
-import {useDispatch} from "react-redux";
-import {Do_login} from "../../redux/user/user-action";
+import {useDispatch, useSelector} from "react-redux";
+import { Do_login} from "../../redux/user/user-action";
 
 const SignIn = ({}) => {
     const dispatch = useDispatch()
 
     const navigate = useNavigate();
-
+    const error = useSelector((state) => state.user.error)
     const [userCred, setUserCred] = useState({
         identifier: "",
         password: "",
@@ -36,8 +38,15 @@ const SignIn = ({}) => {
         try {
             // await auth.signInWithEmailAndPassword(identifier, password);
             dispatch(Do_login(userCred))
-            toast.success(`welcome ${identifier.toString()}`)
-            navigate('/');
+
+            // toast.success(`welcome ${identifier.toString()}`)
+            // navigate('/')
+            if(error){
+                toast.error(`${error.toString()}`, {
+                    theme: "colored"
+                })
+
+            }
 
         } catch (error) {
             console.log(error, `this an error`);

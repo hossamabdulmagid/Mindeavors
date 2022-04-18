@@ -1,11 +1,19 @@
 import {Col, Container, Nav} from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar'
 import Mindeavors from "../../Color logo - no background.svg";
-import {auth} from "../../lib/firebase";
 import {RapperHeaderComponent} from "./header.styles";
+import {useDispatch} from "react-redux";
+import {DoLogout} from "../../redux/user/user-action";
+import {useNavigate} from "react-router-dom";
 
 const Header = ({currentUser, JWT}) => {
     console.log(JWT, `JWT`)
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const HandleLogout = () => {
+        dispatch(DoLogout())
+        navigate('/signin')
+    }
     return (
         <>
             <RapperHeaderComponent>
@@ -23,7 +31,7 @@ const Header = ({currentUser, JWT}) => {
                                         <Nav.Link href="/create-post" className={"Nav-link Nav"}>
                                             Create Post
                                         </Nav.Link>
-                                        <Nav.Link onClick={() => auth.signOut()} className={"Nav-link"}>
+                                        <Nav.Link onClick={() => HandleLogout()} className={"Nav-link"}>
                                         <span>
                                             ({JWT && JWT.user && JWT.user.username})
                                             </span>
