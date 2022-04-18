@@ -49,7 +49,9 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
 
         case UserType.USER_LOGOUT:
-            return {strapiUser: null}
+            return {
+                strapiUser: null
+            }
         case UserType.REGISTER_START:
             return {
                 ...state,
@@ -60,6 +62,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 loading: false,
+                strapiUser: action.payload
 
             }
         case UserType.REGISTER_ERROR:

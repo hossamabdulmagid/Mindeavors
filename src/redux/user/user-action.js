@@ -65,8 +65,9 @@ const Register_Start = () => ({
     type: UserType.REGISTER_START,
 
 })
-const Register_Success = () => ({
+const Register_Success = (data) => ({
     type: UserType.REGISTER_SUCCESS,
+    payload: data,
 
 })
 
@@ -75,21 +76,27 @@ const Register_Error = (error) => ({
     payload: error,
 })
 
-export const do_Register = () => {
+export const do_Register = (signUpCred, toast) => {
     return dispatch => {
         dispatch(Register_Start())
-        axios.post(urlRegister, {
-            "username": "medo",
-            "email": "medohesham@gmail.com",
-            "password": "password123"
-        })
+        axios.post(urlRegister, signUpCred)
             .then((res) => {
-                console.log(res)
-                dispatch(Register_Success())
+                console.log(res.data, `res.data`)
+                toast.success(`welcome your Account Created ${res.data.user.username}`)
+                dispatch(Register_Success(res.data))
             })
             .catch(error => {
-                dispatch(Register_Error(error))
-                console.log(error, `error from Register User`)
+                if (error &&
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.error &&
+                    error.response.data.error.message) {
+                    dispatch(Register_Error(error))
+                    toast.error(` ${error.response.data.error.message}`, {
+                        theme: "colored"
+                    })
+                    console.log(error, `error from Register User`)
+                }
             })
     }
 }

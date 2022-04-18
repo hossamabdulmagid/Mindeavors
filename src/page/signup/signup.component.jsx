@@ -2,14 +2,15 @@ import {useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
-import {auth, createUserProfileDocument} from '../../lib/firebase'
 import {toast} from "react-toastify";
+import {do_Register} from "../../redux/user/user-action";
+import {useDispatch} from "react-redux";
 
 const SignUp = () => {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const [signUpCred, setSignUpCred] = useState({
-        displayName: '',
+        username: '',
         email: '',
         password: '',
     });
@@ -18,7 +19,7 @@ const SignUp = () => {
         const {name, value} = event.target;
         setSignUpCred({...signUpCred, [name]: value})
     }
-    const {displayName, email, password, confirmPassword} = signUpCred;
+    const {username, email, password} = signUpCred;
 
 
     const handleSubmit = async event => {
@@ -27,32 +28,21 @@ const SignUp = () => {
         if (password.length < 6) {
             toast.warn(`The password must be 6 to 32 characters long`)
             return;
-        }
-        try {
-            const {user} = await auth.createUserWithEmailAndPassword(
-                email,
-                password
-            );
-            await createUserProfileDocument(user, {displayName, email, password});
-            toast.success(`welcome your Account Created ${email.toString()}`)
-        } catch (error) {
-            console.log(error, `this an error`);
-            toast.error(` ${error.toString()}`, {
-                theme: "colored"
-            })
 
         }
+        dispatch(do_Register(signUpCred, toast));
+
     }
 
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Full name </Form.Label>
+                <Form.Label> Name </Form.Label>
                 <Form.Control
                     type="text"
                     placeholder="Name"
                     onChange={handleChange}
-                    name={"displayName"}
+                    name={"username"}
                     required
 
                 />
