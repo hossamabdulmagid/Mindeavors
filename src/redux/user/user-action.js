@@ -25,7 +25,7 @@ const Login_Error = (error) => ({
 })
 
 
-export const Do_login = (userCred) => {
+export const Do_login = (userCred,toast) => {
     return dispatch => {
         dispatch(Login_Start())
         axios
@@ -34,9 +34,13 @@ export const Do_login = (userCred) => {
                 console.log('User profile', response.data.user);
                 dispatch(Login_Success(response.data))
                 console.log('User token', response.data.jwt);
+                dispatch(toast.success(`welcome ${response.data.user.username}`))
             })
             .catch((error) => {
                 dispatch(Login_Error(error.response.data.error.name))
+                toast.error(`${error.response.data.error.name.toString()}`, {
+                    theme: "colored"
+                })
                 console.log('An error occurred:', error.response.data.error.name);
             });
     }

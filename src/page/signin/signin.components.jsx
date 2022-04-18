@@ -1,19 +1,18 @@
 import {useState} from 'react';
 import {Button} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
-import {useNavigate} from 'react-router-dom';
-import {auth, signInWithGoogle} from '../../lib/firebase';
-import {FcGoogle} from "react-icons/fc";
 import {toast} from 'react-toastify';
 import {RapperSignInComponent} from './signin.styles'
 import {useDispatch, useSelector} from "react-redux";
-import { Do_login} from "../../redux/user/user-action";
+import {Do_login} from "../../redux/user/user-action";
 
 const SignIn = ({}) => {
     const dispatch = useDispatch()
 
-    const navigate = useNavigate();
+
     const error = useSelector((state) => state.user.error)
+
+
     const [userCred, setUserCred] = useState({
         identifier: "",
         password: "",
@@ -24,7 +23,6 @@ const SignIn = ({}) => {
     const handleChange = event => {
         const {name, value} = event.target;
         setUserCred({...userCred, [name]: value})
-        console.log(userCred, `while  user Typing `)
 
     }
 
@@ -35,27 +33,9 @@ const SignIn = ({}) => {
             toast.warn(`The password must be 6 to 32 characters long`)
             return;
         }
-        try {
-            // await auth.signInWithEmailAndPassword(identifier, password);
-            dispatch(Do_login(userCred))
 
-            // toast.success(`welcome ${identifier.toString()}`)
-            // navigate('/')
-            if(error){
-                toast.error(`${error.toString()}`, {
-                    theme: "colored"
-                })
+        await dispatch(Do_login(userCred, toast))
 
-            }
-
-        } catch (error) {
-            console.log(error, `this an error`);
-            toast.error(`${error.toString()}`, {
-                theme: "colored"
-            })
-
-        }
-        console.log(userCred, `user Submit Login Wating Api`)
 
     }
 
@@ -88,13 +68,6 @@ const SignIn = ({}) => {
                 <Button variant="primary" type="submit">
                     Log In
                 </Button>
-                {/*<br/>*/}
-                {/*<Button className={'btn btn-light'} onClick={signInWithGoogle}>*/}
-                {/*    <h5>*/}
-                {/*        <FcGoogle/>*/}
-                {/*    </h5>*/}
-                {/*    <span>Log in With Google</span>*/}
-                {/*</Button>*/}
             </Form>
         </RapperSignInComponent>
     )
