@@ -50,6 +50,24 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
         case UserType.USER_LOGOUT:
             return {strapiUser: null}
+        case UserType.REGISTER_START:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case UserType.REGISTER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+
+            }
+        case UserType.REGISTER_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
         default:
             return state;
     }
