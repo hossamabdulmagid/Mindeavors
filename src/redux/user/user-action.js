@@ -2,6 +2,7 @@ import {UserType} from "./user-type";
 import axios from 'axios';
 
 let urlRegister = ` http://localhost:1337/api/auth/local/register`;
+
 export const setCurrentUser = (user) => {
 
     return {

@@ -9,10 +9,14 @@ const DeletePost = ({show, handleClose, singlePost, Do_Delete_Post}) => {
 
     const navigate = useNavigate();
     let id = singlePost.id;
-    const headers = {
-        "Authorization": `Bearer ${JWT.jwt}`
-    };
+
     const HandleDeleteReq = () => {
+        const headers = {
+            "Authorization": `Bearer ${JWT.jwt}`
+        };
+        if (!JWT.jwt) {
+            return;
+        }
         Do_Delete_Post(id, headers)
 
         toast.success(`post has been Deleted ${singlePost.attributes.title}`)

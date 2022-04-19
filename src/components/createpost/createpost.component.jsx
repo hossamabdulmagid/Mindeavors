@@ -26,6 +26,7 @@ const CreatePost = ({Do_createPost, newPostData, JWT}) => {
 
     const handleSubmit = event => {
         event.preventDefault();
+      
         Do_createPost(data, headers)
         navigate('/')
         // toast.success(`Post Created Successful`)
