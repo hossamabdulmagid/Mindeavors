@@ -84,6 +84,7 @@ const SinglePost = ({
                         </Card>
                     </RapperHeaderComponent>
                 </div> : <Spinner animation={"border"}/>
+
             }
             <DeletePost
                 show={show}

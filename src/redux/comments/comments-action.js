@@ -92,7 +92,6 @@ export const DoDeleteComment = (data, headers) => {
                 headers: headers
             })
             .then(res => {
-                console.log(res, `response from delete`)
                 dispatch(DeleteCommentSuccess())
                 dispatch(Do_Get_Comments())
 
@@ -100,6 +99,44 @@ export const DoDeleteComment = (data, headers) => {
             .catch(err => {
                 console.log(err)
                 dispatch(DeleteCommentError(err))
+            })
+    }
+}
+
+
+const SingleCommentStart = () => ({
+    type: CommentsType.GET_SINGLE_COMMENT_START,
+})
+
+
+const SingleCommentSuccess = (data) => ({
+    type: CommentsType.GET_SINGLE_COMMENT_SUCCESS,
+    payload: data
+})
+
+const SingleCommentError = (error) => ({
+    type: CommentsType.GET_SINGLE_COMMENT_ERROR,
+    payload: error
+})
+
+
+export const GetSingleComment = (id, headers) => {
+    // as we know we path data to edit Comment as A Props  And dont want this function ☺ xD
+    return dispatch => {
+        dispatch(SingleCommentStart())
+        axios
+            .get(`${url}/${id}`, {
+                headers: headers
+            })
+            .then(res => {
+                console.log(res, `response`)
+                if (res.status === 200) {
+                    dispatch(SingleCommentSuccess(res.data))
+                }
+
+            })
+            .catch(err => {
+                dispatch(SingleCommentError(err))
             })
     }
 }

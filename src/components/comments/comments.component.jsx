@@ -1,7 +1,7 @@
 import {useState} from "react";
 import DeleteComment from "./delete-comment.component";
 import AddComment from "./add-comment.component";
-import {Link} from 'react-router-dom';
+import EditComment from "./edit-comment.component";
 
 const Comments = ({comments}) => {
 
@@ -12,6 +12,13 @@ const Comments = ({comments}) => {
     const handleShow = () => setShow(true);
 
 
+    const [showEditComment, setShowEditComment] = useState(false);
+
+    const handleCloseEditComment = () => setShowEditComment(false);
+
+    const handleShowEditComment = () => setShowEditComment(true);
+
+
     const [data, setData] = useState({});
 
     const getSelection = async (newItem) => {
@@ -20,6 +27,16 @@ const Comments = ({comments}) => {
         // console.log(data, `data while Selection`)
         handleShow();
     }
+
+
+    const [path, setPath] = useState({});
+
+    const GetEditCommentSelected = async (selection) => {
+        await setPath({...selection})
+        console.log(path, `path`);
+        handleShowEditComment();
+    }
+
     return (
         <>
             <div className={"container"}>
@@ -37,10 +54,11 @@ const Comments = ({comments}) => {
                                 </div>
                                 <div className={'col-sm-4'} style={{marginTop: '30px', textAlign: 'center'}}>
                                     <>
-                                        <Link className={`btn btn-success`}
-                                              to={`/edit-comment/${singleComment.id}`}>
+                                        <button
+                                            className={`btn btn-success`}
+                                            onClick={() => GetEditCommentSelected(singleComment)}>
                                             Edit
-                                        </Link>
+                                        </button>
 
                                         <button
                                             className={`btn btn-danger`}
@@ -64,6 +82,12 @@ const Comments = ({comments}) => {
                 handleClose={() => handleClose()}
                 handleShow={() => handleShow()}
                 data={data}
+            />
+            <EditComment
+                show={showEditComment}
+                handleClose={() => handleCloseEditComment()}
+                handleShow={() => handleShowEditComment()}
+                path={path}
             />
         </>
     )

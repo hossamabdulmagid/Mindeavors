@@ -53,7 +53,7 @@ const App = ({currentUser, setCurrentUser}) => {
                         <Route path="/signup" element={JWT ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
                         <Route path="/edit-post/:id" element={<EditPost/>}/>
-                        <Route path="/edit-comment/:id" element={<EditComment/>}/>
+                        {/*<Route path="/edit-comment/:id" element={<EditComment/>}/>*/}
 
                         <Route path="/create-post" element={<RequiredAuth> <CreatePost/></RequiredAuth>}/>
                     </Routes>

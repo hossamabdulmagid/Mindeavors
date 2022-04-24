@@ -38,16 +38,13 @@ const AddComment = ({JWT, DoAddComment}) => {
     return (
         <div className={'container'}>
             <div className={'row'}>
-
                 <RapperCommentsComponent>
-                    <Button onClick={handleShow}style={{margin:'15px'}} >AddComment</Button>
-
+                    <Button onClick={handleShow} style={{margin: '15px'}}>Add Comment</Button>
                     <Modal show={show} onHide={handleClose} animation={false}>
                         <Modal.Header closeButton>
                             <Modal.Title> Comment</Modal.Title>
                         </Modal.Header>
                         <Form onSubmit={handleSubmit}>
-
                             <Modal.Body>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>
@@ -62,11 +59,8 @@ const AddComment = ({JWT, DoAddComment}) => {
                                         required
                                     />
                                 </Form.Group>
-
-
                             </Modal.Body>
                             <Modal.Footer>
-
                                 <Button variant="success" type="submit">
                                     Add Comment
                                 </Button>

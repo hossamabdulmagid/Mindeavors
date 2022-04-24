@@ -8,16 +8,19 @@ const DeleteComment = ({show, handleClose, data, JWT, DoDeleteComment}) => {
     const headers = {
         "Authorization": `Bearer ${JWT.jwt}`
     };
-    let id = data.id;
+
+
     console.log(data, `data`)
+
     const HandleDeleteReq = async () => {
         await DoDeleteComment(data, headers);
         handleClose();
     }
+
     return (
         <Modal show={show} onHide={handleClose} animation={false}>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Post</Modal.Title>
+                <Modal.Title>Delete comment</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <small>
