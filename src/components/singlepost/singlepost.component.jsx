@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import {Button, Spinner} from "react-bootstrap";
 import DeletePost from "../deletepost/deletepost.component";
 import {Do_Get_Comments} from "../../redux/comments/comments-action";
+import Comments from "../comments/comments.component";
 
 const SinglePost = ({
                         Get_Single_post,
@@ -40,6 +41,8 @@ const SinglePost = ({
     const handleClose = () => setShow(false);
 
     const handleShow = () => setShow(true);
+
+
 
     window.scrollTo(0, 0);
 
@@ -77,41 +80,7 @@ const SinglePost = ({
                                     </Button>
                                 }
                             </Card.Footer>
-                            <div className={"container"}>
-                                {comments && comments.data && comments.data.map((singleComment, idx) => {
-                                    return (
-                                        <div className={'container'} key={idx}>
-                                            <div className={"row"}>
-                                                <div className={'col-sm-4'}>
-                                                    <img
-                                                        src={singleComment.avatar}
-                                                        alt={"Image Loaded"}
-                                                        className={"avatar"}
-                                                    />
-                                                    <small>
-                                                        {singleComment && singleComment.first_name}
-                                                        {" "}
-                                                        {singleComment && singleComment.last_name}
-                                                    </small>
-                                                </div>
-                                                <div className={'col-sm-8'}>
-                                                    <p className={'comment-content'}>
-                                                        <small>
-                                                            {singleComment && singleComment.first_name}
-                                                            {" "}
-                                                            {singleComment && singleComment.email}
-                                                            {" "}
-                                                            {singleComment && singleComment.last_name}
-                                                        </small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <p className={'space'}></p>
-                                        </div>
-                                    )
-                                })}
-
-                            </div>
+                            <Comments comments={comments} />
                         </Card>
                     </RapperHeaderComponent>
                 </div> : <Spinner animation={"border"}/>

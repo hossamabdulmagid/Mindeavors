@@ -1,7 +1,7 @@
 import {CommentsType} from "./comments.type";
 import axios from 'axios';
 
-let url = `https://reqres.in/api/users?page=2`;
+let url = `http://localhost:1337/api/comments`;
 
 const Get_Comment_Start = () => ({
     type: CommentsType.GET_COMMENTS_START,
@@ -23,8 +23,9 @@ export const Do_Get_Comments = () => {
         axios
             .get(url)
             .then((res) => {
-                dispatch(Get_Comment_Success(res.data))
-                console.log(res)
+                if (res.status === 200) {
+                    dispatch(Get_Comment_Success(res.data))
+                }
             })
             .catch((error) => {
                 dispatch(Get_Comment_Error(error))

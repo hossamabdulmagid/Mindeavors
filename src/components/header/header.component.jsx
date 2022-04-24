@@ -7,7 +7,6 @@ import {DoLogout} from "../../redux/user/user-action";
 import {useNavigate} from "react-router-dom";
 
 const Header = ({currentUser, JWT}) => {
-    console.log(JWT, `JWT`)
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const HandleLogout = () => {

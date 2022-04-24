@@ -16,6 +16,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditPost from "./components/editpost/editpost.component";
 import CreatePost from "./components/createpost/createpost.component";
 import RequiredAuth from "./lib/requiredAuth";
+import EditComment from "./components/comments/edit-comment.component";
+
 const App = ({currentUser, setCurrentUser}) => {
     const JWT = useSelector((state) => state.user.strapiUser)
 
@@ -51,6 +53,8 @@ const App = ({currentUser, setCurrentUser}) => {
                         <Route path="/signup" element={JWT ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
                         <Route path="/edit-post/:id" element={<EditPost/>}/>
+                        <Route path="/edit-comment/:id" element={<EditComment/>}/>
+
                         <Route path="/create-post" element={<RequiredAuth> <CreatePost/></RequiredAuth>}/>
                     </Routes>
                 </header>
