@@ -2,11 +2,11 @@ import {Button, Modal} from "react-bootstrap";
 import {DoDeleteComment} from "../../redux/comments/comments-action";
 import {connect} from "react-redux";
 
-const DeleteComment = ({show, handleClose, data, JWT, DoDeleteComment}) => {
+const DeleteComment = ({show, handleClose, data, token, DoDeleteComment}) => {
 
 
     const headers = {
-        "Authorization": `Bearer ${JWT.jwt}`
+        "Authorization": `Bearer ${token.jwt}`
     };
 
 
@@ -40,7 +40,7 @@ const DeleteComment = ({show, handleClose, data, JWT, DoDeleteComment}) => {
 }
 
 const mapStateToProps = state => ({
-    JWT: state.user.strapiUser,
+    token: state.user.strapiUser,
 })
 
 const mapDispatchToProps = dispatch => ({

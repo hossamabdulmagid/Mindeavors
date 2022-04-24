@@ -89,6 +89,23 @@ const commentsReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: action.payload,
             }
+
+        case CommentsType.UPDATE_COMMENT_START:
+            return {
+                ...state,
+                loading: true,
+            }
+        case CommentsType.UPDATE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case CommentsType.UPDATE_COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         default:
             return state;
     }

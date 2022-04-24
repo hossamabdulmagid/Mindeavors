@@ -16,10 +16,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditPost from "./components/editpost/editpost.component";
 import CreatePost from "./components/createpost/createpost.component";
 import RequiredAuth from "./lib/requiredAuth";
-import EditComment from "./components/comments/edit-comment.component";
 
 const App = ({currentUser, setCurrentUser}) => {
-    const JWT = useSelector((state) => state.user.strapiUser)
+    const token = useSelector((state) => state.user.strapiUser)
 
     let unsubscribeFormAuth = null;
 
@@ -44,17 +43,15 @@ const App = ({currentUser, setCurrentUser}) => {
     return (
         <>
             <ToastContainer/>
-            <Header currentUser={currentUser} JWT={JWT}/>
+            <Header currentUser={currentUser} token={token}/>
             <div className="App">
                 <header className="App-header">
                     <Routes>
                         <Route path={'/'} exact element={<Homepage/>}/>
-                        <Route path="/signin" element={JWT ? <Navigate to="/"/> : <SignIn/>}/>
-                        <Route path="/signup" element={JWT ? <Navigate to="/"/> : <SignUp/>}/>
+                        <Route path="/signin" element={token ? <Navigate to="/"/> : <SignIn/>}/>
+                        <Route path="/signup" element={token ? <Navigate to="/"/> : <SignUp/>}/>
                         <Route path="/posts/:id" element={<SinglePost/>}/>
                         <Route path="/edit-post/:id" element={<EditPost/>}/>
-                        {/*<Route path="/edit-comment/:id" element={<EditComment/>}/>*/}
-
                         <Route path="/create-post" element={<RequiredAuth> <CreatePost/></RequiredAuth>}/>
                     </Routes>
                 </header>

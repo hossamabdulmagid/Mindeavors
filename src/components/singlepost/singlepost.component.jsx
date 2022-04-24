@@ -19,7 +19,7 @@ const SinglePost = ({
                         Do_Get_Comments,
                         comments = [],
                         currentUser,
-                        JWT
+                        token
                     }) => {
 
     const location = useLocation();
@@ -65,7 +65,7 @@ const SinglePost = ({
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
-                                {JWT ?
+                                {token ?
                                     <>
                                         <Link className={`btn btn-success`}
                                               to={`/edit-post/${singlePost.id}`}>Edit</Link>
@@ -100,7 +100,7 @@ const mapStateToProps = state => ({
     singlePostLoading: state.posts.loading,
     comments: state.comments.comments,
     currentUser: state.user.currentUser,
-    JWT: state.user.strapiUser,
+    token: state.user.strapiUser,
 
 })
 const mapDispatchToProps = dispatch => ({

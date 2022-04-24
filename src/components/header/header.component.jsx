@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {DoLogout} from "../../redux/user/user-action";
 import {useNavigate} from "react-router-dom";
 
-const Header = ({currentUser, JWT}) => {
+const Header = ({currentUser, token}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const HandleLogout = () => {
@@ -25,14 +25,14 @@ const Header = ({currentUser, JWT}) => {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Col/>
                             <Nav className="me-auto Nav">
-                                {JWT ?
+                                {token ?
                                     <>
                                         <Nav.Link href="/create-post" className={"Nav-link Nav"}>
                                             Create Post
                                         </Nav.Link>
                                         <Nav.Link onClick={() => HandleLogout()} className={"Nav-link"}>
                                         <span>
-                                            ({JWT && JWT.user && JWT.user.username})
+                                            ({token && token.user && token.user.username})
                                             </span>
                                             {" logout"}
                                         </Nav.Link>

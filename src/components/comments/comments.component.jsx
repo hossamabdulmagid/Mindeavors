@@ -2,6 +2,7 @@ import {useState} from "react";
 import DeleteComment from "./delete-comment.component";
 import AddComment from "./add-comment.component";
 import EditComment from "./edit-comment.component";
+import {EditIcon, RapperCommentsComponent, TrashIcon} from "./comments.styles";
 
 const Comments = ({comments}) => {
 
@@ -41,40 +42,44 @@ const Comments = ({comments}) => {
         <>
             <div className={"container"}>
                 <AddComment/>
-                {comments && comments.data && comments.data.map((singleComment, idx) => {
-                    return (
-                        <div className={'container text-center'} key={idx}>
-                            <div className={"row"}>
-                                <div className={'col-sm-8'}>
-                                    <p className={'comment-content'}>
-                                        <small>
-                                            {singleComment && singleComment.attributes.content}
-                                        </small>
-                                    </p>
-                                </div>
-                                <div className={'col-sm-4'} style={{marginTop: '30px', textAlign: 'center'}}>
-                                    <>
-                                        <button
-                                            className={`btn btn-success`}
-                                            onClick={() => GetEditCommentSelected(singleComment)}>
-                                            Edit
-                                        </button>
+                <RapperCommentsComponent>
 
-                                        <button
-                                            className={`btn btn-danger`}
-                                            onClick={() => getSelection(singleComment)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </>
-                                </div>
+                    {comments && comments.data && comments.data.map((singleComment, idx) => {
+                        return (
+                            <div className={'container text-center'} key={idx}>
+                                <div className={"row"}>
 
+
+                                    <div className={'col-sm-8'}>
+                                        <p className={'comment-content'}>
+                                            <small>
+                                                {singleComment && singleComment.attributes.content}
+                                            </small>
+                                        </p>
+                                    </div>
+                                    <div className={'col-sm-4'} style={{marginTop: '30px', textAlign: 'center'}}>
+                                        <>
+                                            <button
+                                                className={`btn btn-success`}
+                                                onClick={() => GetEditCommentSelected(singleComment)}>
+                                                <EditIcon/>
+                                            </button>
+
+                                            <button
+                                                className={`btn btn-danger`}
+                                                onClick={() => getSelection(singleComment)}
+                                            >
+                                                <TrashIcon/>
+                                            </button>
+                                        </>
+                                    </div>
+                                </div>
+                                <p className={'space'}>
+                                </p>
                             </div>
-                            <p className={'space'}>
-                            </p>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </RapperCommentsComponent>
 
             </div>
             <DeleteComment

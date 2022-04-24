@@ -133,10 +133,46 @@ export const GetSingleComment = (id, headers) => {
                 if (res.status === 200) {
                     dispatch(SingleCommentSuccess(res.data))
                 }
-
             })
             .catch(err => {
                 dispatch(SingleCommentError(err))
+            })
+    }
+}
+
+
+const UpdateCommentStart = () => ({
+    type: CommentsType.UPDATE_COMMENT_START,
+})
+
+const UpdatedCommentSuccess = () => ({
+    type: CommentsType.UPDATE_COMMENT_SUCCESS,
+})
+
+const UpdatedCommentError = (error) => ({
+    type: CommentsType.UPDATE_COMMENT_ERROR,
+    payload: error
+})
+
+
+export const DoUpdateComment = (id, content, headers) => {
+    return dispatch => {
+        dispatch(UpdateCommentStart())
+        axios
+            .put(`${url}/${id}`, {
+                    data: content
+                },
+                {
+                    headers: headers
+                })
+            .then(res => {
+                dispatch(UpdatedCommentSuccess())
+                dispatch(Do_Get_Comments())
+
+
+            })
+            .catch(err => {
+                dispatch(UpdatedCommentError(err))
             })
     }
 }

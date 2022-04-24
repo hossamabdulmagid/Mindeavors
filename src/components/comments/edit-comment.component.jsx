@@ -1,10 +1,20 @@
 import {useEffect, useState} from 'react';
 import {RapperCommentsComponent} from "./comments.styles";
-import {GetSingleComment} from "../../redux/comments/comments-action";
+import {DoUpdateComment, GetSingleComment} from "../../redux/comments/comments-action";
 import {connect} from 'react-redux';
 import {Button, Form, Modal, Spinner} from 'react-bootstrap'
 
-const EditComment = ({GetSingleComment, singleComment, loading, JWT, handleClose, handleShow, show, path = {}}) => {
+const EditComment = ({
+                         GetSingleComment,
+                         singleComment,
+                         loading,
+                         token,
+                         handleClose,
+                         handleShow,
+                         show,
+                         path = {},
+                         DoUpdateComment
+                     }) => {
 
 
     let id = path.id;
@@ -12,7 +22,7 @@ const EditComment = ({GetSingleComment, singleComment, loading, JWT, handleClose
     const [content, setContent] = useState("")
 
     const headers = {
-        "Authorization": `Bearer ${JWT.jwt}`
+        "Authorization": `Bearer ${token.jwt}`
     };
 
 
@@ -32,6 +42,8 @@ const EditComment = ({GetSingleComment, singleComment, loading, JWT, handleClose
 
     const handleSubmit = event => {
         event.preventDefault()
+        DoUpdateComment(id, content, headers)
+        handleClose();
     }
 
     return (
@@ -57,7 +69,7 @@ const EditComment = ({GetSingleComment, singleComment, loading, JWT, handleClose
                                         onChange={handleChange}
                                         name={"content"}
                                         className={'textarea'}
-                                        value={path && path.attributes && path.attributes.content || ""}
+                                        defaultValue={path && path.attributes && path.attributes.content || ""}
                                         required
                                     />
                                 </Form.Group>
@@ -72,9 +84,10 @@ const EditComment = ({GetSingleComment, singleComment, loading, JWT, handleClose
                                 </Button>
                             </Modal.Footer>
                         </Form>
-                        :
-                        <Spinner animation={"border"}/>}
-
+                        : <div className={'container text-center'}>
+                            <Spinner animation={"border"}/>
+                        </div>
+                    }
 
                 </Modal>
             </RapperCommentsComponent>
@@ -85,12 +98,13 @@ const EditComment = ({GetSingleComment, singleComment, loading, JWT, handleClose
 const mapStateToProps = state => ({
     singleComment: state.comments.singleComment,
     loading: state.comments.loading,
-    JWT: state.user.strapiUser,
+    token: state.user.strapiUser,
 
 })
 
 const mapDispatchToProps = dispatch => ({
-    GetSingleComment: (id, headers) => dispatch(GetSingleComment(id, headers))
+    GetSingleComment: (id, headers) => dispatch(GetSingleComment(id, headers)),
+    DoUpdateComment: (id, content, headers) => dispatch(DoUpdateComment(id, content, headers))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditComment);

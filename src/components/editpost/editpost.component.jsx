@@ -9,7 +9,7 @@ import {RapperEditPostComponent} from "./editpost.styles";
 const initialValues = {
     title: '', content: ''
 }
-const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, JWT,singlePost}) => {
+const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, token,singlePost}) => {
 
     const location = useLocation();
 
@@ -28,7 +28,7 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, JWT,sin
     let id = location.pathname.slice(11);
 
     const headers = {
-        "Authorization": `Bearer ${JWT.jwt}`
+        "Authorization": `Bearer ${token.jwt}`
     }
     const handleSubmit = event => {
         event.preventDefault()
@@ -37,7 +37,7 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, JWT,sin
         navigate(`/posts/${id}`)
     }
 
-    console.log(JWT, `JWT from Edit Post`);
+    console.log(token, `JWT from Edit Post`);
 
     console.log(postView, `singlePost`)
 
@@ -101,7 +101,7 @@ const mapStataToProps = state => ({
     PostUpdated: state.posts.singlePost,
     postLoading: state.posts.flag,
     postView: state.posts.singlePost.attributes,
-    JWT: state.user.strapiUser,
+    token: state.user.strapiUser,
 })
 const mapDispatchToProps = dispatch => ({
     UpdateSinglePost: (id, headers, data) => dispatch(UpdateSinglePost(id, headers, data)),

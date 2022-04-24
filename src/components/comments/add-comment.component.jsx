@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {RapperCommentsComponent} from "./comments.styles";
 import {DoAddComment} from "../../redux/comments/comments-action";
 
-const AddComment = ({JWT, DoAddComment}) => {
+const AddComment = ({token, DoAddComment}) => {
 
     const [content, setContent] = useState("")
 
@@ -20,13 +20,9 @@ const AddComment = ({JWT, DoAddComment}) => {
     const handleShow = () => setShow(true);
 
     const headers = {
-        "Authorization": `Bearer ${JWT.jwt}`
+        "Authorization": `Bearer ${token.jwt}`
     };
 
-
-    let reset = () => {
-        setContent("")
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -74,7 +70,7 @@ const AddComment = ({JWT, DoAddComment}) => {
     )
 }
 const mapStateToProps = state => ({
-    JWT: state.user.strapiUser,
+    token: state.user.strapiUser,
 })
 
 const mapDispatchToProps = dispatch => ({
