@@ -32,3 +32,41 @@ export const Do_Get_Comments = () => {
             })
     }
 }
+
+
+const AddCommentStart = () => ({
+    type: CommentsType.ADD_COMMENTS_START,
+})
+
+const AddCommentSuccess = () => ({
+    type: CommentsType.ADD_COMMENTS_SUCCESS,
+})
+
+const AddCommentError = (error) => ({
+    type: CommentsType.ADD_COMMENTS_ERROR,
+    payload: error
+})
+
+
+export const DoAddComment = (data, headers) => {
+    return dispatch => {
+        dispatch(AddCommentStart())
+        axios.post(url, {
+                data: data
+            },
+            {
+                headers: headers
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    console.log(res, `response`)
+                    dispatch(AddCommentSuccess(res.data))
+                    dispatch(Do_Get_Comments())
+                }
+            })
+            .catch(error => {
+                dispatch(AddCommentError(error))
+            })
+
+    }
+}

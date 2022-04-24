@@ -3,8 +3,9 @@ import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
 import {RapperCommentsComponent} from "./comments.styles";
+import {DoAddComment} from "../../redux/comments/comments-action";
 
-const AddComment = () => {
+const AddComment = ({JWT, DoAddComment}) => {
 
     const [content, setContent] = useState("")
 
@@ -13,9 +14,14 @@ const AddComment = () => {
         setContent({...content, [name]: value});
     };
 
+    const headers = {
+        "Authorization": `Bearer ${JWT.jwt}`
+    };
+
 
     const handleSubmit = event => {
         event.preventDefault()
+        DoAddComment(content, headers)
     }
 
 
@@ -48,5 +54,11 @@ const AddComment = () => {
 
     )
 }
+const mapStateToProps = state => ({
+    JWT: state.user.strapiUser,
+})
 
-export default connect(null, null)(AddComment);
+const mapDispatchToProps = dispatch => ({
+    DoAddComment: (data, headers) => dispatch(DoAddComment(data, headers)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(AddComment);

@@ -5,11 +5,8 @@ const INITIAL_STATE = {
     loading: false,
     error: null,
     comments: [{
-        postId: null,
         id: null,
-        name: "",
-        email: "",
-        body: ""
+        content: ""
     }]
 };
 
@@ -20,7 +17,6 @@ const commentsReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: true,
             }
-
 
         case CommentsType.GET_COMMENTS_SUCCESS:
             return {
@@ -33,6 +29,29 @@ const commentsReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: false,
                 error: action.payload,
+            }
+
+
+        case CommentsType.ADD_COMMENTS_START:
+            return {
+                ...state,
+                loading: true,
+
+            }
+
+        case CommentsType.ADD_COMMENTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+
+            }
+
+        case CommentsType.ADD_COMMENTS_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+
             }
         default:
             return state;
