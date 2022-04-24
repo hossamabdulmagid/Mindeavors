@@ -53,6 +53,23 @@ const commentsReducer = (state = INITIAL_STATE, action) => {
                 error: action.payload
 
             }
+        case CommentsType.DELETE_COMMENT_START:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case CommentsType.DELETE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case CommentsType.DELETE_COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         default:
             return state;
     }

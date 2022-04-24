@@ -70,3 +70,36 @@ export const DoAddComment = (data, headers) => {
 
     }
 }
+
+
+const DeleteCommentStart = () => ({
+    type: CommentsType.DELETE_COMMENT_START,
+})
+const DeleteCommentSuccess = () => ({
+    type: CommentsType.DELETE_COMMENT_SUCCESS,
+})
+const DeleteCommentError = (error) => ({
+    type: CommentsType.DELETE_COMMENT_ERROR,
+    payload: error,
+})
+
+export const DoDeleteComment = (data, headers) => {
+
+    return dispatch => {
+        dispatch(DeleteCommentStart())
+        axios.delete(`${url}/${data.id}`,
+            {
+                headers: headers
+            })
+            .then(res => {
+                console.log(res, `response from delete`)
+                dispatch(DeleteCommentSuccess())
+                dispatch(Do_Get_Comments())
+
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch(DeleteCommentError(err))
+            })
+    }
+}

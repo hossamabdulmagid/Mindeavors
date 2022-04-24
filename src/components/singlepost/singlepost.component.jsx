@@ -80,7 +80,7 @@ const SinglePost = ({
                                     </Button>
                                 }
                             </Card.Footer>
-                            <Comments comments={comments} />
+                            <Comments comments={comments}  />
                         </Card>
                     </RapperHeaderComponent>
                 </div> : <Spinner animation={"border"}/>
