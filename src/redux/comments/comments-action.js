@@ -23,7 +23,7 @@ export const Do_Get_Comments = (id) => {
     return dispatch => {
         dispatch(Get_Comment_Start())
         axios
-            .get(`http://localhost:1337/api/posts/${id}?populate=comments`)
+            .get(`http://localhost:1337/api/posts/${id}?populate=*`)
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(Get_Comment_Success(res.data.data.attributes.comments))
@@ -50,13 +50,13 @@ const AddCommentError = (error) => ({
 })
 
 
-export const DoAddComment = (singlePost, postId, data, headers) => {
+export const DoAddComment = (data, headers) => {
+    console.log(data,`data now@@@@@@@@@@@@@@@@@`)
     return dispatch => {
         dispatch(AddCommentStart())
         axios.post(url, {
-                id: [postId],
-
-                data: data
+                data:
+                data
             },
             {
                 headers: headers
@@ -65,7 +65,7 @@ export const DoAddComment = (singlePost, postId, data, headers) => {
                 if (res.status === 200) {
                     console.log(res, `response`)
                     dispatch(AddCommentSuccess(res.data))
-                    dispatch(Do_Get_Comments(postId))
+                    dispatch(Do_Get_Comments(data.post))
                 }
             })
             .catch(error => {
@@ -87,8 +87,8 @@ const DeleteCommentError = (error) => ({
     payload: error,
 })
 
-export const DoDeleteComment = (data, headers) => {
-
+export const DoDeleteComment = (postId,data, headers) => {
+console.log(data,`data from Do Delete Comment`)
     return dispatch => {
         dispatch(DeleteCommentStart())
         axios.delete(`${url}/${data.id}`,
@@ -97,7 +97,7 @@ export const DoDeleteComment = (data, headers) => {
             })
             .then(res => {
                 dispatch(DeleteCommentSuccess())
-                dispatch(Do_Get_Comments())
+                dispatch(Do_Get_Comments(postId))
 
             })
             .catch(err => {

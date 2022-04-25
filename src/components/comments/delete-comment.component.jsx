@@ -2,7 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 import {DoDeleteComment} from "../../redux/comments/comments-action";
 import {connect} from "react-redux";
 
-const DeleteComment = ({show, handleClose, data, token, DoDeleteComment}) => {
+const DeleteComment = ({show, handleClose, data, token, DoDeleteComment,postId}) => {
 
 
     const headers = {
@@ -13,7 +13,7 @@ const DeleteComment = ({show, handleClose, data, token, DoDeleteComment}) => {
     console.log(data, `data`)
 
     const HandleDeleteReq = async () => {
-        await DoDeleteComment(data, headers);
+        await DoDeleteComment(postId,data, headers);
         handleClose();
     }
 
@@ -44,6 +44,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    DoDeleteComment: (data, headers) => dispatch(DoDeleteComment(data, headers)),
+    DoDeleteComment: (postId,data, headers) => dispatch(DoDeleteComment(postId,data, headers)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteComment);

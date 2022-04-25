@@ -98,6 +98,8 @@ const Comments = ({comments = [], loadingComment, postId, singlePost}) => {
                 handleClose={() => handleClose()}
                 handleShow={() => handleShow()}
                 data={data}
+                postId={postId}
+
             />
             <EditComment
                 show={showEditComment}

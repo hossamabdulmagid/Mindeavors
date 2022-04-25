@@ -7,11 +7,11 @@ import {DoAddComment} from "../../redux/comments/comments-action";
 
 const AddComment = ({token, DoAddComment, postId, singlePost}) => {
 
-    const [content, setContent] = useState("")
+    const [data, setData] = useState({post: '', content: ''})
 
     const handleChange = event => {
         const {name, value} = event.target;
-        setContent({...content, [name]: value});
+        setData({...data, [name]: value});
     };
     const [show, setShow] = useState(false);
 
@@ -26,7 +26,9 @@ const AddComment = ({token, DoAddComment, postId, singlePost}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        DoAddComment(singlePost,postId, content, headers);
+
+        data.post = postId;
+        DoAddComment(data, headers);
         handleClose();
     }
 
@@ -74,6 +76,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    DoAddComment: (singlePost,postId, data, headers) => dispatch(DoAddComment(singlePost,postId, data, headers)),
+    DoAddComment: (data, headers) => dispatch(DoAddComment(data, headers)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(AddComment);
