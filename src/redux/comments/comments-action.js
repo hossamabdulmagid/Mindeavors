@@ -3,6 +3,8 @@ import axios from 'axios';
 
 let url = `http://localhost:1337/api/comments`;
 
+let urlForPostToGetComment = `http://localhost:1337/api/posts/30?populate=comments`;
+
 const Get_Comment_Start = () => ({
     type: CommentsType.GET_COMMENTS_START,
 })
@@ -17,14 +19,14 @@ const Get_Comment_Error = (error) => ({
     payload: error,
 })
 
-export const Do_Get_Comments = () => {
+export const Do_Get_Comments = (id) => {
     return dispatch => {
         dispatch(Get_Comment_Start())
         axios
-            .get(url)
+            .get(`http://localhost:1337/api/posts/${id}?populate=comments`)
             .then((res) => {
                 if (res.status === 200) {
-                    dispatch(Get_Comment_Success(res.data))
+                    dispatch(Get_Comment_Success(res.data.data.attributes.comments))
                 }
             })
             .catch((error) => {
@@ -48,10 +50,12 @@ const AddCommentError = (error) => ({
 })
 
 
-export const DoAddComment = (data, headers) => {
+export const DoAddComment = (singlePost, postId, data, headers) => {
     return dispatch => {
         dispatch(AddCommentStart())
         axios.post(url, {
+                id: [postId],
+
                 data: data
             },
             {
@@ -61,7 +65,7 @@ export const DoAddComment = (data, headers) => {
                 if (res.status === 200) {
                     console.log(res, `response`)
                     dispatch(AddCommentSuccess(res.data))
-                    dispatch(Do_Get_Comments())
+                    dispatch(Do_Get_Comments(postId))
                 }
             })
             .catch(error => {
@@ -155,7 +159,9 @@ const UpdatedCommentError = (error) => ({
 })
 
 
-export const DoUpdateComment = (id, content, headers) => {
+export const DoUpdateComment = (postId, id, content, headers) => {
+    console.log(id, `from edit comment iD`)
+    console.log(postId, `from edit comment postId`)
     return dispatch => {
         dispatch(UpdateCommentStart())
         axios
@@ -167,7 +173,7 @@ export const DoUpdateComment = (id, content, headers) => {
                 })
             .then(res => {
                 dispatch(UpdatedCommentSuccess())
-                dispatch(Do_Get_Comments())
+                dispatch(Do_Get_Comments(postId))
 
 
             })
@@ -176,3 +182,5 @@ export const DoUpdateComment = (id, content, headers) => {
             })
     }
 }
+
+

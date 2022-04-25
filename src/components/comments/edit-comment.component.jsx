@@ -13,7 +13,8 @@ const EditComment = ({
                          handleShow,
                          show,
                          path = {},
-                         DoUpdateComment
+                         DoUpdateComment,
+                         postId
                      }) => {
 
 
@@ -42,7 +43,7 @@ const EditComment = ({
 
     const handleSubmit = event => {
         event.preventDefault()
-        DoUpdateComment(id, content, headers)
+        DoUpdateComment(postId,id, content, headers)
         handleClose();
     }
 
@@ -104,7 +105,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     GetSingleComment: (id, headers) => dispatch(GetSingleComment(id, headers)),
-    DoUpdateComment: (id, content, headers) => dispatch(DoUpdateComment(id, content, headers))
+    DoUpdateComment: (postId,id, content, headers) => dispatch(DoUpdateComment(postId,id, content, headers))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditComment);

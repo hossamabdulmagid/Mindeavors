@@ -4,7 +4,7 @@ import AddComment from "./add-comment.component";
 import EditComment from "./edit-comment.component";
 import {EditIcon, RapperCommentsComponent, TrashIcon} from "./comments.styles";
 
-const Comments = ({comments}) => {
+const Comments = ({comments = [], loadingComment, postId, singlePost}) => {
 
     const [show, setShow] = useState(false);
 
@@ -41,10 +41,21 @@ const Comments = ({comments}) => {
     return (
         <>
             <div className={"container"}>
-                <AddComment/>
+                <AddComment
+                    postId={postId}
+                    singlePost={singlePost}
+
+                />
+
+
+                {comments.length === 0 && !loadingComment ?
+                    (<div className={'container'}>
+                        <h2>No post found matching your filter</h2>
+                    </div>)
+                    : null}
                 <RapperCommentsComponent>
 
-                    {comments && comments.data && comments.data.map((singleComment, idx) => {
+                    {comments && comments.map((singleComment, idx) => {
                         return (
                             <div className={'container text-center'} key={idx}>
                                 <div className={"row"}>
@@ -93,6 +104,7 @@ const Comments = ({comments}) => {
                 handleClose={() => handleCloseEditComment()}
                 handleShow={() => handleShowEditComment()}
                 path={path}
+                postId={postId}
             />
         </>
     )

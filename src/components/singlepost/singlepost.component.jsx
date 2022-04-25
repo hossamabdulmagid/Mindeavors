@@ -19,7 +19,8 @@ const SinglePost = ({
                         Do_Get_Comments,
                         comments = [],
                         currentUser,
-                        token
+                        token,
+                        loadingComment
                     }) => {
 
     const location = useLocation();
@@ -31,7 +32,7 @@ const SinglePost = ({
     useEffect(() => {
         Get_Single_post(id);
 
-        Do_Get_Comments()
+        Do_Get_Comments(id)
 
     }, [Get_Single_post, id, Do_Get_Comments]);
 
@@ -43,12 +44,12 @@ const SinglePost = ({
     const handleShow = () => setShow(true);
 
 
-
     window.scrollTo(0, 0);
 
     const goToSignInPage = () => {
         navigate('/signin')
     }
+    console.log(comments.data, `comments`)
 
 
     return (
@@ -80,7 +81,8 @@ const SinglePost = ({
                                     </Button>
                                 }
                             </Card.Footer>
-                            <Comments comments={comments}  />
+                            <Comments comments={comments && comments.data} loadingComment={loadingComment} postId={id} singlePost={singlePost}/>
+
                         </Card>
                     </RapperHeaderComponent>
                 </div> : <Spinner animation={"border"}/>
@@ -99,13 +101,14 @@ const mapStateToProps = state => ({
     singlePost: state.posts.singlePost,
     singlePostLoading: state.posts.loading,
     comments: state.comments.comments,
+    loadingComment: state.comments.loading,
     currentUser: state.user.currentUser,
     token: state.user.strapiUser,
 
 })
 const mapDispatchToProps = dispatch => ({
     Get_Single_post: (id) => dispatch(Get_Single_post(id)),
-    Do_Get_Comments: () => dispatch(Do_Get_Comments())
+    Do_Get_Comments: (id) => dispatch(Do_Get_Comments(id))
 
 })
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePost);

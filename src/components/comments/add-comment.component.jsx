@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {RapperCommentsComponent} from "./comments.styles";
 import {DoAddComment} from "../../redux/comments/comments-action";
 
-const AddComment = ({token, DoAddComment}) => {
+const AddComment = ({token, DoAddComment, postId, singlePost}) => {
 
     const [content, setContent] = useState("")
 
@@ -26,7 +26,7 @@ const AddComment = ({token, DoAddComment}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        DoAddComment(content, headers);
+        DoAddComment(singlePost,postId, content, headers);
         handleClose();
     }
 
@@ -74,6 +74,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    DoAddComment: (data, headers) => dispatch(DoAddComment(data, headers)),
+    DoAddComment: (singlePost,postId, data, headers) => dispatch(DoAddComment(singlePost,postId, data, headers)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(AddComment);
