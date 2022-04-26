@@ -12,6 +12,15 @@ export const EditIcon = styled(BiEdit)``;
 
 
 export const RapperCommentsComponent = styled.div`
+  .add-comment {
+    margin: 15px;
+  }
+
+  .pull-right {
+    float: right;
+    display: inline;
+  }
+
   button {
     cursor: pointer;
   }

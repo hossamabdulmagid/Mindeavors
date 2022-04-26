@@ -37,7 +37,7 @@ const AddComment = ({token, DoAddComment, postId, singlePost}) => {
         <div className={'container'}>
             <div className={'row'}>
                 <RapperCommentsComponent>
-                    <Button onClick={handleShow} style={{margin: '15px'}}>Add Comment</Button>
+                    <Button onClick={handleShow} className={'add-comment'} >Add Comment</Button>
                     <Modal show={show} onHide={handleClose} animation={false}>
                         <Modal.Header closeButton>
                             <Modal.Title> Comment</Modal.Title>
