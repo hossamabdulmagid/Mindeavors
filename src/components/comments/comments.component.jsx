@@ -35,11 +35,11 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
     return (
         <>
             <div className={"container"}>
-                <AddComment
+                {token && token.jwt ? <AddComment
                     postId={postId}
                     singlePost={singlePost}
+                /> : null}
 
-                />
                 {comments.length === 0 && !loadingComment ?
                     (<div className={'container'}>
                         <h2>No post found matching your filter</h2>
