@@ -64,7 +64,8 @@ const SinglePost = ({
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
-                                {token ?
+                                {token && token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author)?
+
                                     <>
                                         <Link className={`btn btn-success`}
                                               to={`/edit-post/${singlePost.id}`}>Edit</Link>
@@ -74,9 +75,7 @@ const SinglePost = ({
                                         >
                                             Delete
                                         </Button>
-                                    </> : <Button onClick={goToSignInPage} variant="warning" size={'sm'}>
-                                        log in to edit or delete post
-                                    </Button>
+                                    </> : <small>not owner for post to take action</small>
                                 }
                             </Card.Footer>
                             <Comments comments={comments && comments.data} loadingComment={loadingComment} postId={id}

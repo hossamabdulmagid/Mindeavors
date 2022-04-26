@@ -78,7 +78,7 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
                                                                 <TrashIcon
                                                                     onClick={() => getSelection(singleComment)}/>
                                                             </> :
-                                                            <h1>NOt Owner</h1>
+                                                            <small>not owner</small>
                                                         }
                                                     </div>
 
