@@ -34,16 +34,16 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
         handleShowEditComment();
     }
 
+
     return (
         <>
             <div className={"container"}>
-
-
                 {comments.length === 0 && !loadingComment ?
                     (<div className={'container'}>
-                        <h2>No post found matching your filter</h2>
+                        <h2>No comment found on this post</h2>
                     </div>)
                     : null}
+
                 <RapperCommentsComponent>
                     {comments && comments.map((singleComment, idx) => {
                         return (
@@ -65,13 +65,23 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
                                             </Moment>
                                         </small>
 
+
                                         <div className={`pull-right`}>
                                             {token && token.jwt ? (
                                                 <>
+                                                    <div>
+                                                        {token.user.id.toString() === singleComment.attributes.author ||
+                                                        token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author) ?
+                                                            <>
+                                                                <EditIcon
+                                                                    onClick={() => GetEditCommentSelected(singleComment)}/>
+                                                                <TrashIcon
+                                                                    onClick={() => getSelection(singleComment)}/>
+                                                            </> :
+                                                            <h1>NOt Owner</h1>
+                                                        }
+                                                    </div>
 
-                                                    <EditIcon onClick={() => GetEditCommentSelected(singleComment)}/>
-
-                                                    <TrashIcon onClick={() => getSelection(singleComment)}/>
                                                 </>
                                             ) : null}
                                         </div>

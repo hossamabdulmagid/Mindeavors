@@ -7,12 +7,16 @@ import {DoAddComment} from "../../redux/comments/comments-action";
 
 const AddComment = ({token, DoAddComment, postId, singlePost}) => {
 
-    const [data, setData] = useState({post: '', content: ''})
+
+    let userId = token.user.id;
+
+    const [data, setData] = useState({post: '', content: '', author: userId})
 
     const handleChange = event => {
         const {name, value} = event.target;
         setData({...data, [name]: value});
     };
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -26,7 +30,6 @@ const AddComment = ({token, DoAddComment, postId, singlePost}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
         data.post = postId;
         DoAddComment(data, headers);
         handleClose();

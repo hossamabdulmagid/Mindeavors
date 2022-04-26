@@ -9,9 +9,12 @@ const CreatePost = ({Do_createPost, newPostData, token}) => {
 
     const navigate = useNavigate();
 
+    let userId = token.user.id;
+
     const [data, setData] = useState({
         title: '',
         content: '',
+        author: userId
     })
 
     const headers = {
