@@ -2,7 +2,7 @@ import {useState} from 'react';
 import Form from "react-bootstrap/Form";
 import {Button, Modal} from "react-bootstrap";
 import {connect} from "react-redux";
-import {RapperCommentsComponent} from "./comments.styles";
+import {PlusIcon, RapperCommentsComponent} from "./comments.styles";
 import {DoAddComment} from "../../redux/comments/comments-action";
 
 const AddComment = ({token, DoAddComment, postId, singlePost}) => {
@@ -37,7 +37,10 @@ const AddComment = ({token, DoAddComment, postId, singlePost}) => {
         <div className={'container'}>
             <div className={'row'}>
                 <RapperCommentsComponent>
-                    <Button onClick={handleShow} className={'add-comment'} >Add Comment</Button>
+                    <h5 onClick={handleShow} className={'add-comment'}>
+                        <PlusIcon/>
+                        comment
+                    </h5>
                     <Modal show={show} onHide={handleClose} animation={false}>
                         <Modal.Header closeButton>
                             <Modal.Title> Comment</Modal.Title>
@@ -78,4 +81,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     DoAddComment: (data, headers) => dispatch(DoAddComment(data, headers)),
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddComment);

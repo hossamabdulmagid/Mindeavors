@@ -37,11 +37,7 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
     return (
         <>
             <div className={"container"}>
-                {token && token.jwt ?
-                    <AddComment
-                        postId={postId}
-                        singlePost={singlePost}
-                    /> : null}
+
 
                 {comments.length === 0 && !loadingComment ?
                     (<div className={'container'}>
@@ -60,31 +56,25 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
                                             </small>
                                         </p>
                                     </div>
-                                    <div className={'col-sm-12'}>
-                                        <p className={'card-footer'}>
-                                            <IconClock/>
+                                    <div className={'col-sm-12 card-footer'}>
+                                        <IconClock/>
+                                        <small className={'time'}>
                                             <Moment
                                                 format="MMMM Do YYYY, h:mm a">
                                                 {singleComment && singleComment.attributes && singleComment.attributes.createdAt}
                                             </Moment>
-                                            <div className={"pull-right"}>
-                                                {token && token.jwt ? (
-                                                    <>
-                                                        <button
-                                                            className={`btn btn-success`}
-                                                            onClick={() => GetEditCommentSelected(singleComment)}>
-                                                            <EditIcon/>
-                                                        </button>
-                                                        <button
-                                                            className={`btn btn-danger`}
-                                                            onClick={() => getSelection(singleComment)}
-                                                        >
-                                                            <TrashIcon/>
-                                                        </button>
-                                                    </>
-                                                ) : null}
-                                            </div>
-                                        </p>
+                                        </small>
+
+                                        <div className={`pull-right`}>
+                                            {token && token.jwt ? (
+                                                <>
+
+                                                    <EditIcon onClick={() => GetEditCommentSelected(singleComment)}/>
+
+                                                    <TrashIcon onClick={() => getSelection(singleComment)}/>
+                                                </>
+                                            ) : null}
+                                        </div>
                                     </div>
                                 </div>
                                 <p className={'space'}>
@@ -92,6 +82,14 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
                             </div>
                         )
                     })}
+                    <div>
+                        {token && token.jwt ?
+                            <AddComment
+                                postId={postId}
+                                singlePost={singlePost}
+                            />
+                            : null}
+                    </div>
                 </RapperCommentsComponent>
             </div>
 

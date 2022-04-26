@@ -3,15 +3,16 @@ import {FcAlarmClock} from "react-icons/fc";
 
 
 export const RapperPostListComponent = styled.div`
-  h4{
-    margin:10px;
-    padding:10px;
+  h4 {
+    margin: 10px;
+    padding: 10px;
   }
-  p{
-    margin:10px;
-    padding:10px;
+
+  p {
+    margin: 10px;
+    padding: 10px;
   }
-  
+
   .mb-2 {
     padding: 10px;
     text-align: left;
@@ -28,5 +29,5 @@ export const RapperPostListComponent = styled.div`
 
 export const IconClock = styled(FcAlarmClock)`
   margin: 4px;
-  padding:1px;  
+  padding: 1px;
 `;
