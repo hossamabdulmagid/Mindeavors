@@ -9,15 +9,13 @@ import {RapperEditPostComponent} from "./editpost.styles";
 const initialValues = {
     title: '', content: ''
 }
-const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, token,singlePost}) => {
+const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, token, singlePost}) => {
 
     const location = useLocation();
 
     const navigate = useNavigate();
 
-
     const [data, setData] = useState(initialValues)
-
 
     const handleChange = event => {
         const {name, value} = event.target;
@@ -30,20 +28,17 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, token,s
     const headers = {
         "Authorization": `Bearer ${token.jwt}`
     }
+
     const handleSubmit = event => {
         event.preventDefault()
         UpdateSinglePost(id, headers, data)
-        // toast.success(`Post Updated Successful`)
         navigate(`/posts/${id}`)
     }
-
-    console.log(token, `JWT from Edit Post`);
-
-    console.log(postView, `singlePost`)
 
     const Cancel = () => {
         navigate(`/posts/${id}`)
     }
+
     useEffect(() => {
         Get_Single_post(id);
         setData(postView)
@@ -67,7 +62,6 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, token,s
                                 value={data.title}
                                 required
                             />
-
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>
@@ -93,7 +87,6 @@ const EditPost = ({UpdateSinglePost, PostUpdated, postLoading, postView, token,s
                 </RapperEditPostComponent>
             </div>
         </div>
-
     )
 }
 

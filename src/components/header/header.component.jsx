@@ -7,12 +7,16 @@ import {DoLogout} from "../../redux/user/user-action";
 import {useNavigate} from "react-router-dom";
 
 const Header = ({currentUser, token}) => {
+
     const navigate = useNavigate()
+
     const dispatch = useDispatch();
+
     const HandleLogout = () => {
         dispatch(DoLogout())
         navigate('/signin')
     }
+
     return (
         <>
             <RapperHeaderComponent>
@@ -48,11 +52,9 @@ const Header = ({currentUser, token}) => {
                                 }
                             </Nav>
                         </Navbar.Collapse>
-
                     </Container>
                 </Navbar>
             </RapperHeaderComponent>
-
         </>
     )
 }

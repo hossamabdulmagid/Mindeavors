@@ -34,7 +34,6 @@ export const Do_get_posts = () => {
         axios
             .get(url)
             .then((res) => {
-                console.log(res, `response l ll`)
                 if (res.status === 200) {
                     dispatch(Post_Success(res.data.data))
                 }
@@ -76,9 +75,7 @@ export const UpdateSinglePost = (id, headers, data) => {
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(Edit_Post_Success(res.data))
-
                     dispatch(Get_Single_post(id))
-                    console.log(res, `response from Api`)
                 }
             })
             .catch(error => {
@@ -109,7 +106,6 @@ export const Get_Single_post = (id) => {
         axios.get(`${urlSinglePost}${id}`)
             .then((res) => {
                 dispatch(Single_Post_Success(res.data.data))
-                console.log(res, `response from Single`)
             })
             .catch(error => {
                 dispatch(Single_Post_Error(error))
@@ -132,7 +128,6 @@ const Delete_Post_Error = (error) => ({
 })
 
 export const Do_Delete_Post = (id, headers) => {
-    console.log(`${id} got Called`)
     return dispatch => {
         dispatch(Delete_Post_Start())
         axios
@@ -144,7 +139,6 @@ export const Do_Delete_Post = (id, headers) => {
                 if (res.status === 200) {
                     dispatch(Delete_Post_Success())
                     dispatch(Do_get_posts())
-                    console.log(res, `response From api`)
                 }
             })
             .catch(error => {
@@ -181,7 +175,6 @@ export const Do_createPost = (data, headers) => {
                 })
             .then((res) => {
                 if (res.status === 200) {
-                    console.log(res, `response from Api`)
                     dispatch(Create_Post_Success(res))
                 }
             })

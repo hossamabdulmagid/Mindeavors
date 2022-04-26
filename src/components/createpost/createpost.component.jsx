@@ -18,7 +18,6 @@ const CreatePost = ({Do_createPost, newPostData, token}) => {
         "Authorization": `Bearer ${token.jwt}`
     };
 
-
     const handleChange = event => {
         const {name, value} = event.target;
         setData({...data, [name]: value})
@@ -26,10 +25,8 @@ const CreatePost = ({Do_createPost, newPostData, token}) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-
         Do_createPost(data, headers)
         navigate('/')
-        // toast.success(`Post Created Successful`)
     }
 
     useEffect(() => {
@@ -37,7 +34,6 @@ const CreatePost = ({Do_createPost, newPostData, token}) => {
     }, [newPostData.status])
 
     return (
-
         <RapperCreatePostComponent className={'container'}>
             <div className={'row'}>
                 <Form onSubmit={handleSubmit}>
@@ -52,7 +48,6 @@ const CreatePost = ({Do_createPost, newPostData, token}) => {
                             name={"title"}
                             required
                         />
-
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>
@@ -73,9 +68,7 @@ const CreatePost = ({Do_createPost, newPostData, token}) => {
                 </Form>
             </div>
         </RapperCreatePostComponent>
-
     )
-
 }
 
 const mapStateToProps = state => ({

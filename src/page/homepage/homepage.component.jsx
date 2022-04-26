@@ -62,7 +62,6 @@ const Homepage = ({Do_get_posts, allPosts, allPostsLoading}) => {
 
                 </div>
             </div>
-
         </RapperHeaderComponent>
     )
 }

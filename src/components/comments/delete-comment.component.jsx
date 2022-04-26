@@ -2,18 +2,15 @@ import {Button, Modal} from "react-bootstrap";
 import {DoDeleteComment} from "../../redux/comments/comments-action";
 import {connect} from "react-redux";
 
-const DeleteComment = ({show, handleClose, data, token, DoDeleteComment,postId}) => {
+const DeleteComment = ({show, handleClose, data, token, DoDeleteComment, postId}) => {
 
 
     const headers = {
         "Authorization": `Bearer ${token.jwt}`
     };
 
-
-    console.log(data, `data`)
-
     const HandleDeleteReq = async () => {
-        await DoDeleteComment(postId,data, headers);
+        await DoDeleteComment(postId, data, headers);
         handleClose();
     }
 
@@ -40,10 +37,10 @@ const DeleteComment = ({show, handleClose, data, token, DoDeleteComment,postId})
 }
 
 const mapStateToProps = state => ({
-    token: state.user.strapiUser,
+    token: state.user.strapiUser || "",
 })
 
 const mapDispatchToProps = dispatch => ({
-    DoDeleteComment: (postId,data, headers) => dispatch(DoDeleteComment(postId,data, headers)),
+    DoDeleteComment: (postId, data, headers) => dispatch(DoDeleteComment(postId, data, headers)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteComment);

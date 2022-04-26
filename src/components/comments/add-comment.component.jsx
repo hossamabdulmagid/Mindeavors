@@ -72,7 +72,7 @@ const AddComment = ({token, DoAddComment, postId, singlePost}) => {
     )
 }
 const mapStateToProps = state => ({
-    token: state.user.strapiUser,
+    token: state.user.strapiUser || "",
 })
 
 const mapDispatchToProps = dispatch => ({

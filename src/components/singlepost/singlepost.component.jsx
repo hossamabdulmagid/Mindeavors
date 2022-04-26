@@ -49,8 +49,6 @@ const SinglePost = ({
     const goToSignInPage = () => {
         navigate('/signin')
     }
-    console.log(comments.data, `comments`)
-
 
     return (
         <>
@@ -81,7 +79,8 @@ const SinglePost = ({
                                     </Button>
                                 }
                             </Card.Footer>
-                            <Comments comments={comments && comments.data} loadingComment={loadingComment} postId={id} singlePost={singlePost}/>
+                            <Comments comments={comments && comments.data} loadingComment={loadingComment} postId={id}
+                                      singlePost={singlePost} token={token}/>
 
                         </Card>
                     </RapperHeaderComponent>

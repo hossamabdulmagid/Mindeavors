@@ -4,7 +4,7 @@ import AddComment from "./add-comment.component";
 import EditComment from "./edit-comment.component";
 import {EditIcon, RapperCommentsComponent, TrashIcon} from "./comments.styles";
 
-const Comments = ({comments = [], loadingComment, postId, singlePost}) => {
+const Comments = ({comments = [], loadingComment, postId, singlePost, token}) => {
 
     const [show, setShow] = useState(false);
 
@@ -12,29 +12,23 @@ const Comments = ({comments = [], loadingComment, postId, singlePost}) => {
 
     const handleShow = () => setShow(true);
 
-
     const [showEditComment, setShowEditComment] = useState(false);
 
     const handleCloseEditComment = () => setShowEditComment(false);
 
     const handleShowEditComment = () => setShowEditComment(true);
 
-
     const [data, setData] = useState({});
 
     const getSelection = async (newItem) => {
         await setData({...newItem})
-        // console.log(newItem, `newItem`);
-        // console.log(data, `data while Selection`)
         handleShow();
     }
-
 
     const [path, setPath] = useState({});
 
     const GetEditCommentSelected = async (selection) => {
         await setPath({...selection})
-        console.log(path, `path`);
         handleShowEditComment();
     }
 
@@ -46,8 +40,6 @@ const Comments = ({comments = [], loadingComment, postId, singlePost}) => {
                     singlePost={singlePost}
 
                 />
-
-
                 {comments.length === 0 && !loadingComment ?
                     (<div className={'container'}>
                         <h2>No post found matching your filter</h2>
@@ -59,30 +51,32 @@ const Comments = ({comments = [], loadingComment, postId, singlePost}) => {
                         return (
                             <div className={'container text-center'} key={idx}>
                                 <div className={"row"}>
-
-
-                                    <div className={'col-sm-8'}>
+                                    <div className={'col-sm-12'}>
                                         <p className={'comment-content'}>
                                             <small>
                                                 {singleComment && singleComment.attributes.content}
                                             </small>
                                         </p>
                                     </div>
-                                    <div className={'col-sm-4'} style={{marginTop: '30px', textAlign: 'center'}}>
-                                        <>
-                                            <button
-                                                className={`btn btn-success`}
-                                                onClick={() => GetEditCommentSelected(singleComment)}>
-                                                <EditIcon/>
-                                            </button>
+                                    <div className={'col-sm-12'}
+                                         style={{textAlign: 'right'}}>
+                                        {token && token.jwt ? (
+                                            <>
+                                                <button
+                                                    className={`btn btn-success`}
+                                                    onClick={() => GetEditCommentSelected(singleComment)}>
+                                                    <EditIcon/>
+                                                </button>
 
-                                            <button
-                                                className={`btn btn-danger`}
-                                                onClick={() => getSelection(singleComment)}
-                                            >
-                                                <TrashIcon/>
-                                            </button>
-                                        </>
+                                                <button
+                                                    className={`btn btn-danger`}
+                                                    onClick={() => getSelection(singleComment)}
+                                                >
+                                                    <TrashIcon/>
+                                                </button>
+                                            </>
+                                        ) : null}
+
                                     </div>
                                 </div>
                                 <p className={'space'}>

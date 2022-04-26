@@ -3,8 +3,6 @@ import axios from 'axios';
 
 let url = `http://localhost:1337/api/comments`;
 
-let urlForPostToGetComment = `http://localhost:1337/api/posts/30?populate=comments`;
-
 const Get_Comment_Start = () => ({
     type: CommentsType.GET_COMMENTS_START,
 })
@@ -51,7 +49,6 @@ const AddCommentError = (error) => ({
 
 
 export const DoAddComment = (data, headers) => {
-    console.log(data,`data now@@@@@@@@@@@@@@@@@`)
     return dispatch => {
         dispatch(AddCommentStart())
         axios.post(url, {
@@ -63,7 +60,6 @@ export const DoAddComment = (data, headers) => {
             })
             .then(res => {
                 if (res.status === 200) {
-                    console.log(res, `response`)
                     dispatch(AddCommentSuccess(res.data))
                     dispatch(Do_Get_Comments(data.post))
                 }
@@ -87,8 +83,7 @@ const DeleteCommentError = (error) => ({
     payload: error,
 })
 
-export const DoDeleteComment = (postId,data, headers) => {
-console.log(data,`data from Do Delete Comment`)
+export const DoDeleteComment = (postId, data, headers) => {
     return dispatch => {
         dispatch(DeleteCommentStart())
         axios.delete(`${url}/${data.id}`,
@@ -133,7 +128,6 @@ export const GetSingleComment = (id, headers) => {
                 headers: headers
             })
             .then(res => {
-                console.log(res, `response`)
                 if (res.status === 200) {
                     dispatch(SingleCommentSuccess(res.data))
                 }
@@ -160,8 +154,6 @@ const UpdatedCommentError = (error) => ({
 
 
 export const DoUpdateComment = (postId, id, content, headers) => {
-    console.log(id, `from edit comment iD`)
-    console.log(postId, `from edit comment postId`)
     return dispatch => {
         dispatch(UpdateCommentStart())
         axios

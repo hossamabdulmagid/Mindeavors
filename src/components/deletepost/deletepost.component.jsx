@@ -5,18 +5,22 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
 const DeletePost = ({show, handleClose, singlePost, Do_Delete_Post}) => {
+
     const token = useSelector((state) => state.user.strapiUser)
 
     const navigate = useNavigate();
+
     let id = singlePost.id;
 
     const HandleDeleteReq = () => {
         const headers = {
             "Authorization": `Bearer ${token.jwt}`
         };
+
         if (!token.jwt) {
             return;
         }
+
         Do_Delete_Post(id, headers)
 
         toast.success(`post has been Deleted ${singlePost.attributes.title}`)

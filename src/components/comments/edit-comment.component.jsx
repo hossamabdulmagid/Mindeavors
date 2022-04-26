@@ -17,7 +17,6 @@ const EditComment = ({
                          postId
                      }) => {
 
-
     let id = path.id;
 
     const [content, setContent] = useState("")
@@ -30,7 +29,6 @@ const EditComment = ({
     const handleChange = event => {
         const {name, value} = event.target;
         setContent({...content, [name]: value});
-        console.log(content)
     };
 
     useEffect(() => {
@@ -43,7 +41,7 @@ const EditComment = ({
 
     const handleSubmit = event => {
         event.preventDefault()
-        DoUpdateComment(postId,id, content, headers)
+        DoUpdateComment(postId, id, content, headers)
         handleClose();
     }
 
@@ -51,45 +49,40 @@ const EditComment = ({
         <div className={'row'}>
             <RapperCommentsComponent>
                 <Modal show={show} onHide={handleClose} animation={false}>
-
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Comment</Modal.Title>
                     </Modal.Header>
                     {!loading ?
-                        <Form onSubmit={handleSubmit}>
-                            <Modal.Body>
-
-
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>
-                                        Content
-                                    </Form.Label>
-                                    <Form.Control
-                                        as="textarea"
-                                        placeholder="Enter Body"
-                                        onChange={handleChange}
-                                        name={"content"}
-                                        className={'textarea'}
-                                        defaultValue={path && path.attributes && path.attributes.content || ""}
-                                        required
-                                    />
-                                </Form.Group>
-
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleClose}>
-                                    Discard
-                                </Button>
-                                <Button variant="primary" type={'submit'}>
-                                    Updated Comment
-                                </Button>
-                            </Modal.Footer>
-                        </Form>
-                        : <div className={'container text-center'}>
+                       (<Form onSubmit={handleSubmit}>
+                           <Modal.Body>
+                               <Form.Group className="mb-3" controlId="formBasicPassword">
+                                   <Form.Label>
+                                       Content
+                                   </Form.Label>
+                                   <Form.Control
+                                       as="textarea"
+                                       placeholder="Enter Body"
+                                       onChange={handleChange}
+                                       name={"content"}
+                                       className={'textarea'}
+                                       defaultValue={path && path.attributes && path.attributes.content || ""}
+                                       required
+                                   />
+                               </Form.Group>
+                           </Modal.Body>
+                           <Modal.Footer>
+                               <Button variant="secondary" onClick={handleClose}>
+                                   Discard
+                               </Button>
+                               <Button variant="primary" type={'submit'}>
+                                   Updated Comment
+                               </Button>
+                           </Modal.Footer>
+                       </Form>)
+                        : (<div className={'container text-center'}>
                             <Spinner animation={"border"}/>
-                        </div>
+                        </div>)
                     }
-
                 </Modal>
             </RapperCommentsComponent>
         </div>
@@ -99,13 +92,13 @@ const EditComment = ({
 const mapStateToProps = state => ({
     singleComment: state.comments.singleComment,
     loading: state.comments.loading,
-    token: state.user.strapiUser,
+    token: state.user.strapiUser || "",
 
 })
 
 const mapDispatchToProps = dispatch => ({
     GetSingleComment: (id, headers) => dispatch(GetSingleComment(id, headers)),
-    DoUpdateComment: (postId,id, content, headers) => dispatch(DoUpdateComment(postId,id, content, headers))
+    DoUpdateComment: (postId, id, content, headers) => dispatch(DoUpdateComment(postId, id, content, headers))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditComment);
