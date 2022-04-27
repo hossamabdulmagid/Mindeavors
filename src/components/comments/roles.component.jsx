@@ -6,14 +6,16 @@ const UserOwnerThePost = (props) => {
 }
 
 const UserOwnerTheComment = (props) => {
-    return <small><TrashIcon onClick={props.getSelection}/> <EditIcon onClick={props.GetEditCommentSelected}/></small>
+    return <small><EditIcon onClick={props.GetEditCommentSelected}/> <TrashIcon onClick={props.getSelection}/> </small>
 }
 
 const Role = (props) => {
     let {token, singleComment, singlePost, getSelection, GetEditCommentSelected} = props;
 
     if (token === singleComment) return <UserOwnerTheComment {...props}/>;
-    else if (token === singlePost) return <UserOwnerThePost {...props}/>
+
+    else if (token === singlePost) return <UserOwnerThePost {...props}/>;
+
     else return null;
 }
 

@@ -64,7 +64,7 @@ const SinglePost = ({
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="text-muted">
-                                {token && token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author)?
+                                {token && token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author) ?
 
                                     <>
                                         <Link className={`btn btn-success`}
@@ -75,12 +75,16 @@ const SinglePost = ({
                                         >
                                             Delete
                                         </Button>
-                                    </> : <small>just view</small>
+                                    </> : null
                                 }
                             </Card.Footer>
-                            <Comments comments={comments && comments.data} loadingComment={loadingComment} postId={id}
-                                      singlePost={singlePost} token={token}/>
-
+                            <Comments
+                                comments={comments && comments.data}
+                                loadingComment={loadingComment}
+                                postId={id}
+                                singlePost={singlePost}
+                                token={token}
+                            />
                         </Card>
                     </RapperHeaderComponent>
                 </div> : <Spinner animation={"border"}/>

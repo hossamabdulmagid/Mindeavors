@@ -70,17 +70,6 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
                                             {token && token.jwt ? (
                                                 <>
                                                     <div>
-                                                        {/*{token.user.id.toString() === singleComment.attributes.author ||*/}
-                                                        {/*token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author) ?*/}
-                                                        {/*    <>*/}
-                                                        {/*        <EditIcon*/}
-                                                        {/*            onClick={() => GetEditCommentSelected(singleComment)}/>*/}
-                                                        {/*        <TrashIcon*/}
-                                                        {/*            onClick={() => getSelection(singleComment)}/>*/}
-                                                        {/*    </>*/}
-                                                        {/*    :*/}
-                                                        {/*    <small>not owner</small>*/}
-                                                        {/*}*/}
                                                         <Role
                                                             token={token.user.id.toString()}
                                                             singleComment={singleComment.attributes.author}
