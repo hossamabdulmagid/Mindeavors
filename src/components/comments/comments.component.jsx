@@ -2,9 +2,10 @@ import {useState} from "react";
 import DeleteComment from "./delete-comment.component";
 import AddComment from "./add-comment.component";
 import EditComment from "./edit-comment.component";
-import {EditIcon, RapperCommentsComponent, TrashIcon} from "./comments.styles";
+import {RapperCommentsComponent} from "./comments.styles";
 import Moment from "react-moment";
 import {IconClock} from "../postlist/postlist.styles";
+import Role from "./roles.component";
 
 const Comments = ({comments = [], loadingComment, postId, singlePost, token}) => {
 
@@ -65,25 +66,33 @@ const Comments = ({comments = [], loadingComment, postId, singlePost, token}) =>
                                             </Moment>
                                         </small>
 
-
                                         <div className={`pull-right`}>
                                             {token && token.jwt ? (
                                                 <>
                                                     <div>
-                                                        {token.user.id.toString() === singleComment.attributes.author ||
-                                                        token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author) ?
-                                                            <>
-                                                                <EditIcon
-                                                                    onClick={() => GetEditCommentSelected(singleComment)}/>
-                                                                <TrashIcon
-                                                                    onClick={() => getSelection(singleComment)}/>
-                                                            </> :
-                                                            <small>not owner</small>
-                                                        }
+                                                        {/*{token.user.id.toString() === singleComment.attributes.author ||*/}
+                                                        {/*token.user.id.toString() === (singlePost && singlePost.attributes && singlePost.attributes.author) ?*/}
+                                                        {/*    <>*/}
+                                                        {/*        <EditIcon*/}
+                                                        {/*            onClick={() => GetEditCommentSelected(singleComment)}/>*/}
+                                                        {/*        <TrashIcon*/}
+                                                        {/*            onClick={() => getSelection(singleComment)}/>*/}
+                                                        {/*    </>*/}
+                                                        {/*    :*/}
+                                                        {/*    <small>not owner</small>*/}
+                                                        {/*}*/}
+                                                        <Role
+                                                            token={token.user.id.toString()}
+                                                            singleComment={singleComment.attributes.author}
+                                                            singlePost={singlePost && singlePost.attributes && singlePost.attributes.author}
+                                                            getSelection={() => getSelection(singleComment)}
+                                                            GetEditCommentSelected={() => GetEditCommentSelected(singleComment)}
+                                                        />
                                                     </div>
-
                                                 </>
                                             ) : null}
+
+
                                         </div>
                                     </div>
                                 </div>

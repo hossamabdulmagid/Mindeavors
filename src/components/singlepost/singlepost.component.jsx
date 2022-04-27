@@ -75,7 +75,7 @@ const SinglePost = ({
                                         >
                                             Delete
                                         </Button>
-                                    </> : <small>not owner for post to take action</small>
+                                    </> : <small>just view</small>
                                 }
                             </Card.Footer>
                             <Comments comments={comments && comments.data} loadingComment={loadingComment} postId={id}
